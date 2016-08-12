@@ -16,7 +16,7 @@ public class User {
 	private String password;
 	private String email;
 	private String description;
-	private ArrayList<Place> visitedPlaces;
+	private ArrayList<Destination> visitedPlaces;
 
 	public User(String firstName, String lastName, String password, String email, String description)
 			throws InvalidDataException {
@@ -83,8 +83,7 @@ public class User {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void addVisitedDestination(Destination destination) {
+		this.visitedPlaces.add(destination);
 	}
-
 }
