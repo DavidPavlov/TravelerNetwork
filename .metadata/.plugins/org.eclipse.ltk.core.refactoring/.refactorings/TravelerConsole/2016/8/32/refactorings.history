@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;models.Place&apos; to &apos;Destination&apos;&#x0D;&#x0A;- Original project: &apos;TravelerConsole&apos;&#x0D;&#x0A;- Original element: &apos;models.Place&apos;&#x0D;&#x0A;- Renamed element: &apos;models.Destination&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Place&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;models{Place.java[Place" matchStrategy="1" name="Destination" qualified="false" references="true" similarDeclarations="false" stamp="1471017901623" textual="false" version="1.0"/>
+</session>

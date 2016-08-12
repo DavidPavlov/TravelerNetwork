@@ -1,0 +1,15 @@
+package models;
+
+public class PlaceToSleep {
+	private String name;
+	private Location location;
+	private String contact;
+
+	public PlaceToSleep(String name, Location location, String contact) {
+		super();
+		this.name = name;
+		this.location = location;
+		this.contact = contact;
+	}
+
+}
