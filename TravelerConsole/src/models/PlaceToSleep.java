@@ -5,7 +5,7 @@ public class PlaceToSleep {
 	private Location location;
 	private String contact;
 
-	public PlaceToSleep(String name, Location location, String contact) {
+	public PlaceToSleep (String name, Location location, String contact) {
 		this.name = name;
 		this.location = location;
 		this.contact = contact;
@@ -15,12 +15,13 @@ public class PlaceToSleep {
 		return name;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
 
 	public String getContact() {
 		return contact;
+	}
+	
+	public Location getLocation() throws CloneNotSupportedException {
+		return (Location) location.clone();
 	}
 
 }

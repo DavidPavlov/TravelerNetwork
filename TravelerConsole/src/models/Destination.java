@@ -39,7 +39,11 @@ public class Destination {
 		return description;
 	}
 
-	public Location getLocation() {
-		return location;
+	public Location getLocation() throws CloneNotSupportedException {
+		return (Location) location.clone();
+	}
+	
+	public ArrayList<Comment> getComments() {
+		return (ArrayList<Comment>) comments.clone();
 	}
 }
