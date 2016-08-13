@@ -1,0 +1,37 @@
+package functionality;
+
+import java.util.ArrayList;
+
+import models.Destination;
+import models.PlaceToEat;
+import models.PlaceToSleep;
+import models.User;
+
+public class ConsoleEngine {
+
+	private ArrayList<User> userDataBase;
+	private ArrayList<Destination> destinations;
+	private ArrayList<PlaceToEat> resturants;
+	private ArrayList<PlaceToSleep> hotels;
+	private User currentUser;
+
+	public ConsoleEngine() {
+		this.userDataBase = new ArrayList<>();
+		this.destinations = new ArrayList<>();
+		this.resturants = new ArrayList<>();
+		this.hotels = new ArrayList<>();
+	}
+
+	public void run() {
+		IO.printLine("For list of commands type help");
+		while (true) {
+			commandParse();
+		}
+	}
+
+	private void commandParse() {
+		String line = IO.readLine();
+
+	}
+
+}
