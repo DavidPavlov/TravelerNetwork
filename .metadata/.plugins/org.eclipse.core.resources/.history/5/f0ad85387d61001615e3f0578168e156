@@ -1,11 +1,10 @@
 package functionality;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import exceptions.InvalidAuthorException;
 import exceptions.InvalidCoordinatesException;
 import exceptions.InvalidDataException;
-import models.Comment;
 import models.Destination;
 import models.Location;
 import models.PlaceToEat;
@@ -16,11 +15,15 @@ public class ConsoleEngine {
 
 	private HashMap<String, User> userDataBase; // users stored by email
 	private HashMap<String, Destination> destinations;
+	private ArrayList<PlaceToEat> resturants;
+	private ArrayList<PlaceToSleep> hotels;
 	private User currentUser;
 
 	public ConsoleEngine() {
 		this.userDataBase = new HashMap<>();
 		this.destinations = new HashMap<>();
+		this.resturants = new ArrayList<>();
+		this.hotels = new ArrayList<>();
 	}
 
 	public void run() {
@@ -33,14 +36,12 @@ public class ConsoleEngine {
 			} catch (ArrayIndexOutOfBoundsException e) {
 				// if the parameters are invalid
 				IO.printLine("Invalid parameters for the specified command !");
-			} catch (InvalidAuthorException e) {
-				IO.printLine(e.getMessage());
 			}
 			IO.printLine("Enter a command!");
 		}
 	}
 
-	private void commandParse() throws InvalidDataException, InvalidAuthorException {
+	private void commandParse() throws InvalidDataException {
 		String line = IO.readLine();
 		if (line == null) {
 			return;
@@ -53,7 +54,7 @@ public class ConsoleEngine {
 		}
 	}
 
-	private String execudeCommand(String[] commandParameters) throws InvalidDataException, InvalidAuthorException {
+	private String execudeCommand(String[] commandParameters) throws InvalidDataException {
 		String command = commandParameters[0];
 		switch (command) {
 		case "help":
@@ -66,12 +67,6 @@ public class ConsoleEngine {
 			return executeLogoutCommand();
 		case "AddDestination":
 			return executeAddDestinationCommand(commandParameters);
-		case "AddHotel":
-			return executeAddHotelCommand(commandParameters);
-		case "AddResturant":
-			return executeAddResturantCommand(commandParameters);
-		case "AddComment":
-			return executeAddCommentCommand(commandParameters);
 		default:
 			return "Invalid Command";
 		}
@@ -87,11 +82,8 @@ public class ConsoleEngine {
 		sb.append("Logout // logs out the current user\n");
 		sb.append("AddDestination name description lattitude longitude "
 				+ "//adds a destination if it doesn't exist in the database or add's it to the current user's visited destinations\n");
-		sb.append(
-				"AddHotel name destinationName lattitude longitude contact //adds a place to sleep for a destination/n");
-		sb.append(
-				"AddResturant name destinationName lattitude longitude workingHours //adds a place to eat for a destination/n");
-		sb.append("AddComment destinationName comment");
+		sb.append("AddHotel name destinationName lattitude longitude //adds a place to sleep for a destination/n");
+		sb.append("AddResturant name destinationName lattitude longitude //adds a place to eat for a destination");
 
 		return sb.toString();
 	}
@@ -170,64 +162,5 @@ public class ConsoleEngine {
 				new Location(Double.parseDouble(lattitude), Double.parseDouble(longtitude)));
 		this.destinations.put(name, destination);
 		return "Destination added succesfully";
-	}
-
-	private String executeAddHotelCommand(String[] commandParameters)
-			throws NumberFormatException, InvalidCoordinatesException {
-		String destinationName = commandParameters[2];
-		if (this.currentUser == null) {
-			return "You have to login to add a hotel";
-		}
-		if (!this.destinations.containsKey(destinationName)) {
-			return "Invalid Destination";
-		}
-		String name = commandParameters[1];
-		String latitude = commandParameters[3];
-		String longtitude = commandParameters[4];
-		String contact = commandParameters[5];
-		PlaceToSleep hotel = PlaceToSleepFactory.createPlaceToSleep(name,
-				new Location(Double.parseDouble(latitude), Double.parseDouble(longtitude)), contact);
-		this.destinations.get(destinationName).addPlaceToSleep(hotel);
-		return "Hotel added succesfully";
-	}
-
-	private String executeAddResturantCommand(String[] commandParameters)
-			throws NumberFormatException, InvalidCoordinatesException {
-		String destinationName = commandParameters[2];
-		if (this.currentUser == null) {
-			return "You have to login to add a hotel";
-		}
-		if (!this.destinations.containsKey(destinationName)) {
-			return "Invalid Destination";
-		}
-		String name = commandParameters[1];
-		String latitude = commandParameters[3];
-		String longtitude = commandParameters[4];
-		String workingHours = commandParameters[5];
-		PlaceToEat resturant = PlaceToEatFactory.createPlaceToEat(name, workingHours,
-				new Location(Double.parseDouble(latitude), Double.parseDouble(longtitude)));
-		this.destinations.get(destinationName).addPlaceToEat(resturant);
-		return "Resturant added succesfully";
-	}
-
-	private String executeAddCommentCommand(String[] commandParameters)
-			throws InvalidDataException, InvalidAuthorException {
-		String destinationName = commandParameters[1];
-		if (this.currentUser == null) {
-			return "You have to login to add a hotel";
-		}
-		if (!this.destinations.containsKey(destinationName)) {
-			return "Invalid Destination";
-		}
-		StringBuilder sb = new StringBuilder();
-		for (int i = 2; i < commandParameters.length; i++) {
-			sb.append(commandParameters[i]);
-			sb.append(" ");
-		}
-		if (sb.toString().trim().isEmpty()) {
-			return "Empty comment";
-		}
-		this.destinations.get(destinationName).addComment(new Comment(sb.toString().trim(), this.currentUser));
-		return "Comment added succesfully";
 	}
 }

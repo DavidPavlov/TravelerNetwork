@@ -33,14 +33,12 @@ public class ConsoleEngine {
 			} catch (ArrayIndexOutOfBoundsException e) {
 				// if the parameters are invalid
 				IO.printLine("Invalid parameters for the specified command !");
-			} catch (InvalidAuthorException e) {
-				IO.printLine(e.getMessage());
 			}
 			IO.printLine("Enter a command!");
 		}
 	}
 
-	private void commandParse() throws InvalidDataException, InvalidAuthorException {
+	private void commandParse() throws InvalidDataException {
 		String line = IO.readLine();
 		if (line == null) {
 			return;
@@ -53,7 +51,7 @@ public class ConsoleEngine {
 		}
 	}
 
-	private String execudeCommand(String[] commandParameters) throws InvalidDataException, InvalidAuthorException {
+	private String execudeCommand(String[] commandParameters) throws InvalidDataException {
 		String command = commandParameters[0];
 		switch (command) {
 		case "help":
