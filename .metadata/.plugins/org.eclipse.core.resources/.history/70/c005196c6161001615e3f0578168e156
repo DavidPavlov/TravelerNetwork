@@ -1,0 +1,27 @@
+package functionality;
+
+import java.util.Scanner;
+
+public class IO {
+
+	public static void print(String message) {
+		System.out.print(message);
+	}
+
+	public static void printLine(String message) {
+		System.out.println(message);
+	}
+
+	public static String readLine() {
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		// try {
+		// input = sc.nextLine();
+		// } catch (NoSuchElementException e) {
+		// sc.close();
+		// return null;
+		// }
+
+		return input;
+	}
+}

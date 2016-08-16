@@ -2,11 +2,11 @@ package models;
 
 import exceptions.InvalidCoordinatesException;
 
-public class Location {
+public class Location implements Cloneable {
 	private double latitude;
 	private double longitude;
 
-	public Location(double latitude, double longitude) throws InvalidCoordinatesException {
+	public Location (double latitude, double longitude) throws InvalidCoordinatesException {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 	}
@@ -31,6 +31,11 @@ public class Location {
 			throw new InvalidCoordinatesException();
 		}
 		this.longitude = longitude;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 }

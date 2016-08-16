@@ -20,8 +20,8 @@ public class PlaceToEat {
 		return workingHours;
 	}
 
-	public Location getLocation() {
-		return location;
+	public Location getLocation() throws CloneNotSupportedException {
+		return (Location) location.clone();
 	}
 
 }

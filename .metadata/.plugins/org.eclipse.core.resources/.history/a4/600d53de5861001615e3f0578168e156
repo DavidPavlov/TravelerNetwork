@@ -1,0 +1,5 @@
+package functionality;
+
+public interface IFactory {
+
+}

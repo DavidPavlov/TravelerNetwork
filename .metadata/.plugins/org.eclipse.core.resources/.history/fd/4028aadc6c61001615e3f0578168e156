@@ -1,0 +1,70 @@
+package functionality;
+
+import java.util.ArrayList;
+
+import models.Destination;
+import models.PlaceToEat;
+import models.PlaceToSleep;
+import models.User;
+
+public class ConsoleEngine {
+
+	private ArrayList<User> userDataBase;
+	private ArrayList<Destination> destinations;
+	private ArrayList<PlaceToEat> resturants;
+	private ArrayList<PlaceToSleep> hotels;
+	private User currentUser;
+
+	public ConsoleEngine() {
+		this.userDataBase = new ArrayList<>();
+		this.destinations = new ArrayList<>();
+		this.resturants = new ArrayList<>();
+		this.hotels = new ArrayList<>();
+	}
+
+	public void run() {
+		IO.printLine("For list of commands type help");
+		while (true) {
+			commandParse();
+			IO.printLine("Enter a command!");
+		}
+	}
+
+	private void commandParse() {
+		String line = IO.readLine();
+		if (line == null) {
+			return;
+		}
+
+		String[] commandParameters = line.split(" +");
+		String output = execudeCommand(commandParameters);
+		if (output != null) {
+			IO.print(output);
+		}
+	}
+
+	private String execudeCommand(String[] commandParameters) {
+		String command = commandParameters[0];
+		switch (command) {
+		case "help":
+			return executeHelpCommand();
+		default:
+			return null;
+		}
+
+	}
+
+	private String executeHelpCommand() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Possible commands:\n");
+		sb.append("----------------------\n");
+		sb.append("RegisterUser firstName lastName password email description  //registers a new user\n");
+		sb.append("Login email password // login with a specified user\n");
+		sb.append("AddDestination name description lattitude longitude "
+				+ "//adds a destination if it doesn't exist in the database or add's it to the current user's visited destinations\n");
+		sb.append("AddHotel name destinationName lattitude longitude //adds a place to sleep for a destination/n");
+		sb.append("AddResturant name destinationName lattitude longitude //adds a place to eat for a destination");
+
+		return sb.toString();
+	}
+}
