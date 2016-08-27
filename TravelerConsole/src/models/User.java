@@ -15,12 +15,12 @@ public class User implements Cloneable {
 
 	private String firstName;
 	private String lastName;
-	private char[] password; // instead of String for security
+	private String password; // instead of String for security
 	private String email;
 	private String description;
 	private ArrayList<Destination> visitedPlaces;
 
-	public User(String firstName, String lastName, char[] password, String email, String description)
+	public User(String firstName, String lastName, String password, String email, String description)
 			throws InvalidDataException {
 		super();
 		this.setFirstName(firstName);
@@ -57,12 +57,12 @@ public class User implements Cloneable {
 		}
 	}
 
-	public char[] getPassword() {
-		return password.clone();
+	public String getPassword() {
+		return password;
 	}
 
-	private void setPassword(char[] password) throws InvalidPasswordException {
-		if (!(password == null) && password.length >= MINIMUM_PASSWORD_LENGTH) {
+	private void setPassword(String password) throws InvalidPasswordException {
+		if (!(password == null) && password.length() >= MINIMUM_PASSWORD_LENGTH) {
 			this.password = password;
 		} else {
 			throw new InvalidPasswordException();
