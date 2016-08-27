@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import exceptions.InvalidDataException;
+import functionality.DaoParser;
 import models.User;
 
 public class UserDao {
@@ -22,16 +23,15 @@ public class UserDao {
 
 	public void connectToDB() {
 		try {
-			this.connection = DriverManager
-					.getConnection("jdbc:mysql://localhost/traveler_db?user=root&password=123456");
+			this.connection = DriverManager.getConnection(DaoParser.PATH_TO_BASE);
 		} catch (SQLException e) {
 			displaySqlErrors(e);
 		}
 	}
 
-	public String insertUser(User user) {
+	public boolean insertUser(User user) {
 		if (user == null) {
-			return null;
+			return false;
 		}
 		try {
 			java.sql.Statement statement = connection.createStatement();
@@ -39,22 +39,22 @@ public class UserDao {
 					.executeQuery(String.format("select email from users where email = '%s'", user.getEmail()));
 			if (!rs.next()) {
 				int i = statement.executeUpdate(
-						String.format("insert into users values('%s', '%s', '%s', '%s', '%s', now())", user.getEmail(),
+						String.format("insert into users values('%s', '%s', '%s', '%s', '%s')", user.getEmail(),
 								user.getFirstName(), user.getLastName(), user.getPassword(), user.getDescription()));
 				rs.close();
 				statement.close();
 				connection.close();
-				return "User Registered Succesfully";
+				return true;
 			}
 
 			rs.close();
 			statement.close();
 			connection.close();
-			return "There is already a user with this email";
+			return false;
 
 		} catch (SQLException e) {
 			displaySqlErrors(e);
-			return null;
+			return false;
 		}
 	}
 
@@ -80,6 +80,27 @@ public class UserDao {
 			return null;
 		}
 
+	}
+
+	public boolean validateUser(String email, String password) {
+		java.sql.Statement statement;
+		try {
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(String.format("select * from users where email = '%s'", email));
+			if (!rs.next()) {
+				return false;
+			}
+
+			String pass = rs.getString(4);
+			if (pass.equals(password)) {
+				return true;
+			}
+
+			return false;
+		} catch (SQLException e) {
+			displaySqlErrors(e);
+		}
+		return false;
 	}
 
 	private void displaySqlErrors(SQLException e) {

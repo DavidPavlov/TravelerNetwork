@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,14 +19,19 @@ public class LoginAgainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String email = request.getParameter("userEmail");
-		String password = request.getParameter("password");
+		String password = request.getParameter("userPassword");
 		User user = DaoParser.logIn(email, password);
-		if (user!=null) { // the validation is successful
-			request.getSession().setAttribute("user", user); // The user is passed to the current session
+		if (user != null) { // the validation is successful
+			request.getSession().setAttribute("user", user); // The user is
+																// passed to the
+																// current
+																// session
 			System.out.println("Login Successful!");
 			response.sendRedirect("Homepage.html");
 		} else { // No such user name or invalid password

@@ -1,1 +1,2 @@
 1472299001799	Rename type 'DatabaseEngine'
+1472334116945	Extract method 'printToLog'

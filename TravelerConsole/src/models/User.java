@@ -14,7 +14,7 @@ public class User implements Cloneable {
 
 	private String firstName;
 	private String lastName;
-	private String password; // instead of String for security
+	private String password;
 	private String email;
 	private String description;
 	private ArrayList<Destination> visitedPlaces;
