@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <i id="_1243" data-pagelink="8ece9481-8952-955c-ca3f-3cdaa99a1f38"></i>
+    <i id="_1243" data-pagelink="Homepage"></i>
 
     <div id="_1244" class="nm-label">
       <span id="_1245">
@@ -87,7 +87,7 @@
         <ul id="_1263" class="dropdown-menu" role="menu">
           <li href="#">
 
-            <div id="_1264" data-pagelink="eecaca4d-4bf9-4cdb-fc68-6492f5d0c742" class="nm-label">
+            <div id="_1264" data-pagelink="RegistrationPage" class="nm-label">
               <a id="_1265" href="#">
             Нова регистрация<br/>
         </a>
@@ -95,7 +95,7 @@
           </li>
           <li href="#">
 
-            <div id="_1266" data-pagelink="8408d678-e6db-d666-51d1-b7b71a89e61a" class="nm-label">
+            <div id="_1266" data-pagelink="LoginPage" class="nm-label">
               <a id="_1267" href="#">
             Влизане в профил<br/>
         </a>
@@ -183,7 +183,7 @@
         </span>
       </div>
 
-      <div id="_1301" data-pagelink="8ece9481-8952-955c-ca3f-3cdaa99a1f38" class="nm-label">
+      <div id="_1301" data-pagelink="Homepage" class="nm-label">
         <span id="_1302">
             TheTraveller.bg Home<br/>
         </span>
@@ -191,7 +191,7 @@
 
       <div id="_1303" class="nm-label">
         <span id="_1304">
-            Facebook страница<br/>
+        <a href="https://www.facebook.com/TheTravellerBulgaria/">Facebook страница</a>Facebook страница<br/>
         </span>
       </div>
 
@@ -245,7 +245,9 @@
     </div>
 
     <div id="_1321">
-      <form id="_1322" role="form">
+    
+    
+     <form action="register" method="post" id="_1322" role="form">
 
         <div id="_1323">
 
@@ -273,7 +275,7 @@
             Парола:<br/>
         </span>
         </div>
-        <input type="text" id="_1333" placeholder="Актуален e-mail адрес..." class="form-control" />
+        <input type="text" id="_1333" name="userEmail" placeholder="Актуален e-mail адрес..." class="form-control" />
 
         <div id="_1334" class="nm-label">
           <span id="_1335">
@@ -286,22 +288,24 @@
             Фамилия:<br/>
         </span>
         </div>
-        <input type="text" id="_1338" placeholder="Фамилия" class="form-control" />
+        <input type="text" id="_1338" name="userLastName" placeholder="Фамилия" class="form-control" />
 
         <div id="_1339" class="nm-label">
           <span id="_1340">
             Име:<br/>
         </span>
         </div>
-        <input type="text" id="_1341" placeholder="Собствено име" class="form-control" />
-        <input type="text" id="_1342" placeholder="Поне 6 символа..." class="form-control" />
-        <button id="_1343" data-pagelink="8408d678-e6db-d666-51d1-b7b71a89e61a" class="btn btn-default">
+        <input type="text" id="_1341" name = "userFirstName" placeholder="Собствено име" class="form-control" />
+        <input type="password" name="userPassword" id="_1342" placeholder="Поне 6 символа..." class="form-control" />
+        <button id="_1343" type="submit" class="btn btn-default">
           Регистрация
 
         </button>
-        <textarea id="_1344"></textarea>
-
+        <textarea id="_1344" name="userDescription"></textarea>
       </form>
+      
+      
+      
       <div class="checkbox" id="_1345">
         <label id="_1346">
           <input type="checkbox" checked />Съгласен/а съм с правилата за ползване на сайта
@@ -318,7 +322,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="../common-files/js/require.min.js" data-main="../scripts/startup"></script>
+  <script type="text/javascript" src="PagesResourses/common-files/js/require.min.js" data-main="PagesResourses/scripts/startup"></script>
 </body>
 
 </html>

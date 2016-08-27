@@ -7,18 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exceptions.InvalidDataException;
 import functionality.DaoParser;
-
-
+import models.User;
 
 /**
- * Servlet implementation class RegistrationServlet
+ * Servlet implementation class RegAgainServlet
  */
-@WebServlet("/registration")
-public class RegistrationServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegAgainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final int MINIMUM_PASSWORD_LENGTH = 6; // FOR TEST PURPOSES - Min Password length  
+    
+
 	
-	private static final int MINIMUM_PASSWORD_LENGTH = 6; // FOR TEST PURPOSES - Min Password length
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
 		if (!(inputPassword == null) && inputPassword.length() >= MINIMUM_PASSWORD_LENGTH) { // checks if password is correct
 			String firstName = request.getParameter("userFirstName");
 			String lastName = request.getParameter("userLastName");
-			String email = request.getParameter("userEmailAddress");
+			String email = request.getParameter("userEmail");
 			String description = request.getParameter("userDescription");
 			DaoParser.registerUser(firstName, lastName, email, inputPassword, description);
 			System.out.println("User Registration Successful!");
