@@ -1,0 +1,21 @@
+package functionality;
+
+import java.util.Arrays;
+
+import exceptions.InvalidDataException;
+import models.User;
+
+public class EngineDemo {
+	public static void main(String[] args) {
+		try {
+			User user = new User("abcddasdq", "abcasdqwd", new char[] { 'a', 'b', 'c', 'd', '1', '2', '3' },
+					"someman@abv.bg", "whaaaat");
+			System.out.println(Arrays.toString(user.getPassword()).substring(1, user.getPassword().length).replaceAll("[, ]+", ""));
+		} catch (InvalidDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ConsoleEngine eng = new ConsoleEngine();
+		eng.run();
+	}
+}

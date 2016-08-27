@@ -1,0 +1,14 @@
+package functionality;
+
+public class EngineDemo {
+	public static void main(String[] args) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			System.out.println("error");
+		}
+		System.out.println("gg");
+		ConsoleEngine eng = new ConsoleEngine();
+		eng.run();
+	}
+}

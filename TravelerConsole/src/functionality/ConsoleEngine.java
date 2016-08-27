@@ -128,12 +128,12 @@ public class ConsoleEngine {
 
 		User userInDB = userDataBase.get(email);
 		char[] pass = password.toCharArray();
-		if (pass.length != userInDB.getPassword().length) {
+		if (pass.length != userInDB.getPassword().length()) {
 			return "Incorrect Password";
 		}
 
 		for (int i = 0; i < pass.length; i++) {
-			if (pass[i] != userInDB.getPassword()[i]) {
+			if (pass[i] != userInDB.getPassword().charAt(i)) {
 				return "Incorrect Password";
 			}
 		}

@@ -1,6 +1,5 @@
 package models;
 
-
 import java.util.ArrayList;
 
 import exceptions.InvalidAuthorException;
@@ -15,12 +14,12 @@ public class User implements Cloneable {
 
 	private String firstName;
 	private String lastName;
-	private char[] password; // instead of String for security
+	private String password; // instead of String for security
 	private String email;
 	private String description;
 	private ArrayList<Destination> visitedPlaces;
 
-	public User(String firstName, String lastName, char[] password, String email, String description)
+	public User(String firstName, String lastName, String password, String email, String description)
 			throws InvalidDataException {
 		super();
 		this.setFirstName(firstName);
@@ -57,12 +56,12 @@ public class User implements Cloneable {
 		}
 	}
 
-	public char[] getPassword() {
-		return password.clone();
+	public String getPassword() {
+		return password;
 	}
 
-	private void setPassword(char[] password) throws InvalidPasswordException {
-		if (!(password == null) && password.length >= MINIMUM_PASSWORD_LENGTH) {
+	private void setPassword(String password) throws InvalidPasswordException {
+		if (!(password == null) && password.length() >= MINIMUM_PASSWORD_LENGTH) {
 			this.password = password;
 		} else {
 			throw new InvalidPasswordException();
@@ -85,31 +84,40 @@ public class User implements Cloneable {
 		return description;
 	}
 
-	public ArrayList<Destination> getVisitedPlaces(){
+	public ArrayList<Destination> getVisitedPlaces() {
 		return (ArrayList<Destination>) this.visitedPlaces.clone();
 	}
-	
+
 	public void addVisitedDestination(Destination destination) {
 		this.visitedPlaces.add(destination);
 	}
-	
+
 	public void makeAComment(Destination destination, String text) throws InvalidDataException, InvalidAuthorException {
 		destination.addComment(new Comment(text, this));
 	}
-	
+
 	public void likeAComment(Comment comment) {
-		if (comment!=null) {
-			ArrayList<User> userLikersOfComment = comment.getUserLikers(); // all the users who like the comment
+		if (comment != null) {
+			ArrayList<User> userLikersOfComment = comment.getUserLikers(); // all
+																			// the
+																			// users
+																			// who
+																			// like
+																			// the
+																			// comment
 			for (int i = 0; i < userLikersOfComment.size(); i++) {
-				if (userLikersOfComment.get(i)==this) { // if the current user has already liked the comment
+				if (userLikersOfComment.get(i) == this) { // if the current user
+															// has already liked
+															// the comment
 					return; // do nothing
 				}
 			}
 			comment.addLike(); // the comment is liked
-			comment.addUserLiker(this); // the user is added to the list of users who like the comment
+			comment.addUserLiker(this); // the user is added to the list of
+										// users who like the comment
 		}
 	}
-	
+
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return super.clone();

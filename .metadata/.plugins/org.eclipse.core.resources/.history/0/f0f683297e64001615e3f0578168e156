@@ -1,0 +1,13 @@
+package functionality;
+
+import dao.UserDao;
+import exceptions.InvalidDataException;
+import models.User;
+
+public class EngineDemo {
+	public static void main(String[] args) {
+		
+		DatabaseEngine eng = new DatabaseEngine();
+		eng.run();
+	}
+}
