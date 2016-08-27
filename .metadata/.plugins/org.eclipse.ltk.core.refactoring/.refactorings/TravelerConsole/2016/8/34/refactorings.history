@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;functionality.DatabaseEngine&apos; to &apos;DaoParser&apos;&#x0D;&#x0A;- Original project: &apos;TravelerConsole&apos;&#x0D;&#x0A;- Original element: &apos;functionality.DatabaseEngine&apos;&#x0D;&#x0A;- Renamed element: &apos;functionality.DaoParser&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;DatabaseEngine&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;functionality{DatabaseEngine.java[DatabaseEngine" matchStrategy="1" name="DaoParser" qualified="false" references="true" similarDeclarations="false" stamp="1472299001799" textual="false" version="1.0"/>
+</session>

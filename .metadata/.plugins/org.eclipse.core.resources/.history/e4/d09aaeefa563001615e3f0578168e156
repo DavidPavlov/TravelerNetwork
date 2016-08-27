@@ -1,7 +1,0 @@
-package dao;
-import lib.*;
-
-public class UserDao {
-	
-	
-}
