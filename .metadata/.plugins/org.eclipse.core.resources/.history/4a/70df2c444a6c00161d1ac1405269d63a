@@ -1,0 +1,17 @@
+package functionality;
+
+import exceptions.InvalidDataException;
+import models.User;
+
+public class UserFactory {
+
+	public static User createUser(String firstName, String lastName, String password, String email, String description)
+			throws InvalidDataException {
+<<<<<<< HEAD
+		return new User(firstName, lastName, password, email, description);
+=======
+		String pass = password;
+		return new User(firstName, lastName, pass, email, description);
+>>>>>>> b8f073af7ea9f7f5e9dc3b7572dcb35b65125ff1
+	}
+}
