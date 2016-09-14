@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,38 +18,35 @@ import functionality.DaoParser;
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final int MINIMUM_PASSWORD_LENGTH = 6; // FOR TEST PURPOSES -
-															// Min Password
-															// length
+	private static final String NAME_PATTERN = "^[A-Za-z]+$";
+	private static final int MINIMUM_PASSWORD_LENGTH = 6;
+	private static final String EMAIL_PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9]+.[a-z.]+$";
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String inputPassword = request.getParameter("userPassword");
-		if (!(inputPassword == null) && inputPassword.length() >= MINIMUM_PASSWORD_LENGTH) { // checks
-																								// if
-																								// password
-																								// is
-																								// correct
-			String firstName = request.getParameter("userFirstName");
-			String lastName = request.getParameter("userLastName");
-			String email = request.getParameter("userEmailAddress");
-			String description = request.getParameter("userDescription");
+		String firstName = request.getParameter("userFirstName");
+		String lastName = request.getParameter("userLastName");
+		String email = request.getParameter("userEmailAddress");
+		String description = request.getParameter("userDescription");
+
+		if (validateData(firstName, lastName, email, inputPassword)) {
 			boolean isRegistered = DaoParser.registerUser(firstName, lastName, email, inputPassword, description);
 			if (isRegistered) {
 				System.out.println("User Registration Successful!");
 				response.sendRedirect("SuccRegPage.html");
-				return;
 			}
-
+		} else {
+			System.out.println("Registration failed! Password is incorrect!");
+			RequestDispatcher view = request.getRequestDispatcher("RegAgainPage.html");
+			view.forward(request, response);
 		}
+	}
 
-		System.out.println("Registration failed! Password is incorrect!");
-		response.sendRedirect("RegAgainPage.html"); // redirects to regAgainPage
-
+	private static boolean validateData(String firstName, String lastName, String email, String password) {
+		return firstName.matches(NAME_PATTERN) && lastName.matches(NAME_PATTERN) && email.matches(EMAIL_PATTERN)
+				&& password.length() >= MINIMUM_PASSWORD_LENGTH
+				&& (firstName != null && lastName != null && email != null && password != null);
 	}
 
 }

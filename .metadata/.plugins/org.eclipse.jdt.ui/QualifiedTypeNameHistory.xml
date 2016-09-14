@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="functionality.DaoParser"/>
+<fullyQualifiedTypeName name="javafx.print.Printer"/>
+<fullyQualifiedTypeName name="java.io.PrintStream"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="org.apache.tomcat.jni.File"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="exceptions.InvalidDataException"/>
+<fullyQualifiedTypeName name="models.User"/>
+<fullyQualifiedTypeName name="dao.UserDao"/>
+</qualifiedTypeNameHistroy>
