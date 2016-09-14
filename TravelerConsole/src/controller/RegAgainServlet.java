@@ -1,4 +1,4 @@
-package Servlets;
+package controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import exceptions.InvalidDataException;
-import functionality.DaoParser;
+import functionality.UsersManager;
 import models.User;
 
 /**
@@ -32,7 +32,7 @@ public class RegAgainServlet extends HttpServlet {
 			String lastName = request.getParameter("userLastName");
 			String email = request.getParameter("userEmail");
 			String description = request.getParameter("userDescription");
-			DaoParser.registerUser(firstName, lastName, email, inputPassword, description);
+			UsersManager.registerUser(firstName, lastName, email, inputPassword, description);
 			System.out.println("User Registration Successful!");
 			response.sendRedirect("SuccRegPage.html");
 		} else {

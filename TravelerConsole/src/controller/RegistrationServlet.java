@@ -1,4 +1,4 @@
-package Servlets;
+package controller;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import functionality.DaoParser;
+import functionality.UsersManager;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -37,7 +37,7 @@ public class RegistrationServlet extends HttpServlet {
 			String lastName = request.getParameter("userLastName");
 			String email = request.getParameter("userEmailAddress");
 			String description = request.getParameter("userDescription");
-			boolean isRegistered = DaoParser.registerUser(firstName, lastName, email, inputPassword, description);
+			boolean isRegistered = UsersManager.registerUser(firstName, lastName, email, inputPassword, description);
 			if (isRegistered) {
 				System.out.println("User Registration Successful!");
 				response.sendRedirect("SuccRegPage.html");
