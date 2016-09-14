@@ -1,4 +1,4 @@
-package Servlets;
+package controller;
 
 import java.io.IOException;
 
@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import functionality.DaoParser;
+import functionality.UsersManager;
 import models.User;
 
 /**
- * Servlet implementation class LoginAgainServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/login_")
-public class LoginAgainServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,7 +26,7 @@ public class LoginAgainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String email = request.getParameter("userEmail");
 		String password = request.getParameter("userPassword");
-		User user = DaoParser.logIn(email, password);
+		User user = UsersManager.logIn(email, password);
 		if (user != null) { // the validation is successful
 			request.getSession().setAttribute("user", user); // The user is
 																// passed to the
