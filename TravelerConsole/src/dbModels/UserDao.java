@@ -24,11 +24,13 @@ public class UserDao {
 
 	public Set<User> getAllUsers () {
 		Set<User> users = new HashSet<User>();
+		Statement statement=null;
+		ResultSet result=null;
 		try {
 			try {
-				Statement statement = DBManager.getInstance().getConnection().createStatement();
+				statement = DBManager.getInstance().getConnection().createStatement();
 				String selectAllUsersFromDB = "SELECT first_name, last_name, password, email, description FROM users;";
-				ResultSet result = statement.executeQuery(selectAllUsersFromDB);
+				result = statement.executeQuery(selectAllUsersFromDB);
 				while (result.next()) {
 					users.add(new User( result.getString("first_name"), 
 										result.getString("last_name"),
@@ -46,13 +48,23 @@ public class UserDao {
 			//TODO write in the log
 			return users;
 		}
+		finally {
+			try {
+				statement.close();
+				result.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return users;
 	}
 
 	public boolean saveUserToDB(User user) {
 		String insertUserInfoIntoDB = "INSERT INTO users (first_name, last_name, password, email, description) VALUES (?, ?, ?, ?, ?);";
+		PreparedStatement statement=null;
 		try {
-			PreparedStatement statement = DBManager.getInstance().getConnection().prepareStatement(insertUserInfoIntoDB);
+			statement = DBManager.getInstance().getConnection().prepareStatement(insertUserInfoIntoDB);
 			statement.setString(1, user.getFirstName());
 			statement.setString(2, user.getLastName());
 			statement.setString(3, user.getPassword());
@@ -67,10 +79,17 @@ public class UserDao {
 			e.getMessage();
 			return false;
 		}
+		finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return true;
 	}
 	
-
 	private void displaySqlErrors(SQLException e) {
 		System.out.println("SQLException: " + e.getMessage());
 		System.out.println("SQLState: " + e.getSQLState());
