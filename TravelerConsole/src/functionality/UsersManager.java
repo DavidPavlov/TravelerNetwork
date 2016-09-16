@@ -27,7 +27,7 @@ public class UsersManager {
 	
 	public static synchronized UsersManager getInstance(){
 		if (instance==null) {
-			instance= new UsersManager();
+			instance=new UsersManager();
 		}
 		return instance;
 	}
@@ -43,16 +43,6 @@ public class UsersManager {
 		User user = new User(firstName, lastName, password, email, description);
 		registerredUsers.put(email, user); // adds the new user to the collection
 		UserDao.getInstance().saveUserToDB(user); // saves user to DB
-	}
-	
-	public static User logIn(String email, String password) {
-		//TODO make login
-		return new User("", "", "", "", ""); // TODO !! remove after implementation of method
-	}
-
-	public static boolean logOut() {
-		return true;
-		// TODO invalidate session save changes and logout
 	}
 	
 	public void addVisitedDestination(User user, Destination destination) {
@@ -80,9 +70,21 @@ public class UsersManager {
 		return true;
 		// TODO
 	}
+	
+	public boolean updateUserInfo(String email, String password, String firstName, String lastName, String description) {
+		if (!registerredUsers.containsKey(email)) { // no such user
+			return false;
+		}
+		User user=registerredUsers.get(email); // takes the user with the input email and updates their fileds
+		user.setPassword(password);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setDescription(description);
+		UserDao.getInstance().updateUserInDB(email, password, firstName, lastName, description); // updates the DB user:
+		return true;
+	}
 
 	private static void printToLog(String message) {
-
 		File file = new File(PATH_TO_LOG);
 		FileOutputStream out;
 		try {

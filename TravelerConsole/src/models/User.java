@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidDataException;
-import exceptions.InvalidEmailException;
-import exceptions.InvalidPasswordException;
 
 public class User implements Cloneable {
 
@@ -49,7 +47,25 @@ public class User implements Cloneable {
 		return (ArrayList<Destination>) this.visitedPlaces.clone();
 	}
 
-	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public void makeAComment(Destination destination, String text) throws InvalidDataException, InvalidAuthorException {
 		destination.addComment(new Comment(text, this));
