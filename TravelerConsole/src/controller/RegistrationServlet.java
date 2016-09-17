@@ -43,9 +43,12 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	private static boolean validateData(String firstName, String lastName, String email, String password) {
-		return firstName.matches(NAME_PATTERN) && lastName.matches(NAME_PATTERN) && email.matches(EMAIL_PATTERN)
-				&& password.length() >= MINIMUM_PASSWORD_LENGTH
-				&& (firstName != null && lastName != null && email != null && password != null);
+		if ((firstName != null && lastName != null && email != null && password != null)) {
+			return firstName.matches(NAME_PATTERN) && lastName.matches(NAME_PATTERN) && email.matches(EMAIL_PATTERN)
+					&& password.length() >= MINIMUM_PASSWORD_LENGTH;
+		}
+		return false;
+
 	}
 
 }

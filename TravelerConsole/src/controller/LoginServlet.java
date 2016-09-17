@@ -33,10 +33,10 @@ public class LoginServlet extends HttpServlet {
 																// current
 																// session
 			System.out.println("Login Successful!");
-			response.sendRedirect("Homepage.html");
+			response.sendRedirect("index.jsp");
 		} else { // No such user name or invalid password
 			System.out.println("No such username of invalid password!");
-			response.sendRedirect("LoginAgainPage.html");
+			response.sendRedirect("signin.html");
 		}
 	}
 
