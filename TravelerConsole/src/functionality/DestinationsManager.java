@@ -98,4 +98,8 @@ public class DestinationsManager {
 		return allDestinationsAndAuthors.get(destinationName);
 	}
 
+	public ConcurrentHashMap<String, String> getAllDestinationsAndAuthors() {
+		return allDestinationsAndAuthors;
+	}
+
 }

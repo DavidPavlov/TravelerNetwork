@@ -75,4 +75,8 @@ public class User implements Cloneable {
 		this.description = description;
 	}
 
+	public void addVisitedPlace(Destination destination) {
+		this.visitedPlaces.add(destination);
+	}
+
 }

@@ -5,9 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import exceptions.CannotConnectToDBException;
+import functionality.DestinationsManager;
+import models.Destination;
 import models.User;
 
 public class UserDao {
@@ -26,6 +30,9 @@ public class UserDao {
 
 	public Set<User> getAllUsers() {
 		System.out.println("Getting all users from DB!!!!");
+		ConcurrentHashMap<String, String> allDestinationsAndAuthors = DestinationsManager.getInstance()
+				.getAllDestinationsAndAuthors(); // cache with dest. names and
+													// author emails
 		Set<User> users = new HashSet<User>();
 		Statement statement = null;
 		ResultSet result = null;
@@ -35,11 +42,35 @@ public class UserDao {
 				String selectAllUsersFromDB = "SELECT first_name, last_name, password, email, description, profilePic FROM users;";
 				result = statement.executeQuery(selectAllUsersFromDB);
 				while (result.next()) {
-					users.add(new User(result.getString("first_name"),
+					User user = new User(result.getString("first_name"),
 							result.getString("last_name"),
 							result.getString("password"), result.getString("email"),
 							result.getString("description"),
-							result.getString("profilePic")));
+							result.getString("profilePic")); // creating a new
+																// user with
+																// info from DB
+					for (Entry<String, String> entry : allDestinationsAndAuthors.entrySet()) { // searches
+																								// for
+																								// user
+																								// email
+																								// in
+																								// cache
+						if (entry.getValue().equals(user.getEmail())) { // when
+																		// match
+							Destination destination = DestinationsManager.getInstance()
+									.getDestinationFromCache(entry.getKey()); // creates
+																				// a
+																				// destination
+																				// with
+																				// info
+																				// from
+																				// Manager
+																				// cache
+							user.addVisitedPlace(destination); // add dest. to
+																// new user
+						}
+					}
+					users.add(user); // add user to allUsers cache
 				}
 				System.out.println("All users returned from DB.");
 				// TODO add destinations to each user (form DB)
