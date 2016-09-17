@@ -115,7 +115,7 @@ public class DestinationDAO {
 		return destinations;
 	}
 
-	public boolean saveDestinationToDB(User u, Destination destination) throws CloneNotSupportedException {
+	public boolean saveDestinationToDB(User u, Destination destination) {
 		String insertDestinationInfoIntoDB = "INSERT INTO destinations (name, description, longitude, lattitude, picture) VALUES (?, ?, ?, ?, ?);";
 		String insertIntoVisitedDestinations = "INSERT INTO visited_destinations (destination_name, user_email) VALUES (?, ?);";
 		PreparedStatement statement = null;
@@ -126,7 +126,7 @@ public class DestinationDAO {
 			statement.setString(1, destination.getName());
 			statement.setString(2, destination.getDescription());
 			statement.setDouble(3, destination.getLocation().getLongitude());
-			statement.setDouble(4, destination.getLocation().getLatitude());
+			statement.setDouble(4, destination.getLocation().getLattitude());
 			statement.setString(5, destination.getPicture());
 			statement.executeUpdate();
 

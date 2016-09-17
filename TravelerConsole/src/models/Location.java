@@ -3,23 +3,23 @@ package models;
 import exceptions.InvalidCoordinatesException;
 
 public class Location implements Cloneable {
-	private double latitude;
+	private double lattitude;
 	private double longitude;
 
-	public Location (double latitude, double longitude) throws InvalidCoordinatesException {
-		this.setLatitude(latitude);
+	public Location(double lattitude, double longitude) throws InvalidCoordinatesException {
+		this.setLattitude(lattitude);
 		this.setLongitude(longitude);
 	}
 
-	public double getLatitude() {
-		return latitude;
+	public double getLattitude() {
+		return lattitude;
 	}
 
-	private void setLatitude(double latitude) throws InvalidCoordinatesException {
-		if (latitude < 0 || latitude > 90) {
+	private void setLattitude(double lattitude) throws InvalidCoordinatesException {
+		if (lattitude < 0 || lattitude > 90) {
 			throw new InvalidCoordinatesException();
 		}
-		this.latitude = latitude;
+		this.lattitude = lattitude;
 	}
 
 	public double getLongitude() {
@@ -31,11 +31,6 @@ public class Location implements Cloneable {
 			throw new InvalidCoordinatesException();
 		}
 		this.longitude = longitude;
-	}
-	
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 
 }

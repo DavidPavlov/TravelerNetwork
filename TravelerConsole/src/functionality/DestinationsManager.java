@@ -47,8 +47,8 @@ public class DestinationsManager {
 		return true;
 	}
 
-	public boolean addDestination(User user, String name, String description, double latitude, double longitude,
-			String picture) throws InvalidCoordinatesException, CloneNotSupportedException {
+	public boolean addDestination(User user, String name, String description, double lattitude, double longitude,
+			String picture) throws InvalidCoordinatesException {
 		if (UsersManager.getInstance().validateUser(user.getEmail(), user.getPassword())) { // if
 			// the
 			// user
@@ -56,7 +56,7 @@ public class DestinationsManager {
 			// in
 			// the
 			// collection
-			Destination destination = new Destination(name, description, new Location(latitude, longitude), picture,
+			Destination destination = new Destination(name, description, new Location(lattitude, longitude), picture,
 					user);
 			allDestinations.put(name, destination); // adds the new destination
 													// to the collection
@@ -67,22 +67,6 @@ public class DestinationsManager {
 			return true;
 		}
 		return false; // no such user
-	}
-
-	public static boolean addComment(User user, String comment) {
-		return true;
-		// TODO
-	}
-
-	public static boolean addHotel(User user, String name, double longitude, double lattitude, String contact) {
-		return true;
-		// TODO
-	}
-
-	public static boolean addResturant(User user, String name, double longtitude, double lattitude,
-			String workingHours) {
-		return true;
-		// TODO
 	}
 
 	public Destination getDestinationFromCache(String destinationName) {

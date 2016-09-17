@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import dbModels.UserDao;
 import exceptions.InvalidAuthorException;
+import exceptions.InvalidCoordinatesException;
 import exceptions.InvalidDataException;
 import models.Comment;
 import models.Destination;
@@ -97,10 +98,18 @@ public class UsersManager {
 		return true;
 	}
 
-	public static boolean addDestination(User user, String name, String description, double longtitude,
-			double lattitude) {
-		return true;
-		// TODO!!!!!!!!!!!!!!!!!!!!!!!
+	public boolean addDestination(User user, Destination destination) throws InvalidCoordinatesException {
+		String destName = destination.getName();
+		String destDescription = destination.getDescription();
+		double destLattitude = destination.getLocation().getLattitude();
+		double destLongitude = destination.getLocation().getLongitude();
+		String destPicture = destination.getPicture();
+		if (DestinationsManager.getInstance().addDestination(user, destName, destDescription, destLattitude,
+				destLongitude, destPicture)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static boolean addHotel(User user, String name, double longtitude, double lattitude, String contact) {

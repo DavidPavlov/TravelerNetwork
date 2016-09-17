@@ -43,8 +43,8 @@ public class Destination {
 		return description;
 	}
 
-	public Location getLocation() throws CloneNotSupportedException {
-		return (Location) location.clone();
+	public Location getLocation() {
+		return location;
 	}
 
 	public String getPicture() {
@@ -52,7 +52,7 @@ public class Destination {
 	}
 
 	public ArrayList<Comment> getComments() {
-		return (ArrayList<Comment>) comments.clone();
+		return comments;
 	}
 
 	public void setName(String name) {
