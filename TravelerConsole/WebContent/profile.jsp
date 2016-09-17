@@ -9,9 +9,15 @@
 	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author"      content="David & Yasen">
-	
+	<script type="text/javascript">
+         
+            function Redirect() {
+               window.location="index.jsp";
+            }
+         
+      </script>
 	<title>The Traveler Bulgaria</title>
-
+	
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -31,14 +37,14 @@
 <body>
 	<!-- Fixed navbar -->
 	<%if(request.getSession().getAttribute("user")==null){ %>
-		<%response.sendRedirect("index.jsp"); %>
+		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
 	<%} %>
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo4.png" alt="The Traveler Bulgaria"></a>
+				<a class="navbar-brand" href="index.jsp"><img src="assets/images/logo4.png" alt="The Traveler Bulgaria"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
@@ -74,7 +80,7 @@
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">						
-						<p><img src="PictureServlet" alt=""></p>
+						<p><img src="PictureServlet" height="150" width="150" alt=""></p>
 					</div>
 				</div>
 				<div class="row widget">

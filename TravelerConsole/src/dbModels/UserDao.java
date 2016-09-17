@@ -32,7 +32,7 @@ public class UserDao {
 		try {
 			try {
 				statement = DBManager.getInstance().getConnection().createStatement();
-				String selectAllUsersFromDB = "SELECT first_name, last_name, password, email, description FROM users;";
+				String selectAllUsersFromDB = "SELECT first_name, last_name, password, email, description, profilePic FROM users;";
 				result = statement.executeQuery(selectAllUsersFromDB);
 				while (result.next()) {
 					users.add(new User(result.getString("first_name"), result.getString("last_name"),
