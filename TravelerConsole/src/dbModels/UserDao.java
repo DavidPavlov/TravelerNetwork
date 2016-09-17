@@ -35,10 +35,13 @@ public class UserDao {
 				String selectAllUsersFromDB = "SELECT first_name, last_name, password, email, description, profilePic FROM users;";
 				result = statement.executeQuery(selectAllUsersFromDB);
 				while (result.next()) {
-					users.add(new User(result.getString("first_name"), result.getString("last_name"),
-							result.getString("password"), result.getString("email"), result.getString("description"),
+					users.add(new User(result.getString("first_name"),
+							result.getString("last_name"),
+							result.getString("password"), result.getString("email"),
+							result.getString("description"),
 							result.getString("profilePic")));
 				}
+				System.out.println("All users returned from DB.");
 				// TODO add destinations to each user (form DB)
 			} catch (CannotConnectToDBException e) {
 				// TODO handle exception - write to log and userFriendly screen
@@ -63,7 +66,6 @@ public class UserDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("All users returned!!!!!");
 		return users;
 	}
 

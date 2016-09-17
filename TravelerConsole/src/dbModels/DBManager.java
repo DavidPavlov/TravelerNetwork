@@ -49,6 +49,7 @@ class DBManager {
 
 	Connection getConnection() throws CannotConnectToDBException {
 		if (connection == null) {
+			System.out.println("getting DBManager conncetion instance = not null!");
 			throw new CannotConnectToDBException();
 		}
 		return connection;
@@ -97,50 +98,50 @@ class DBManager {
 			String createDestinationsTable = "CREATE TABLE destinations " // creates
 																			// destinations
 																			// table
-					+ "(name VARCHAR(64) NOT NULL PRIMARY KEY, " 
+					+ "(name VARCHAR(64) NOT NULL PRIMARY KEY, "
 					+ "description VARCHAR(500) NOT NULL, "
-					+ "longitude VARCHAR(20) NOT NULL, " 
-					+ "lattitude VARCHAR(20) NOT NULL);"
-					+ "picture VARCHAR(100)";
+					+ "longitude VARCHAR(20) NOT NULL, "
+					+ "lattitude VARCHAR(20) NOT NULL,"
+					+ "picture VARCHAR(100));";
 			String createUsersTable = "CREATE TABLE users " // creates users
 															// table
-					+ "(email VARCHAR(64) NOT NULL PRIMARY KEY," 
+					+ "(email VARCHAR(64) NOT NULL PRIMARY KEY,"
 					+ "password VARCHAR(64) NOT NULL,"
 					+ "first_name VARCHAR(64) NOT NULL,"
 					+ "last_name VARCHAR(64) NOT NULL,"
-					+ "description VARCHAR(500) NOT NULL);" 
-					+ "profilePic VARCHAR(100)";
+					+ "description VARCHAR(500) NOT NULL,"
+					+ "profilePic VARCHAR(100));";
 			String createVisitedDestinationsTable = "CREATE TABLE visited_destinations (" // creates
 																							// visited
 																							// destinations...
 					+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," // ...table
 					+ "destination_name VARCHAR(64) NOT NULL,"
 					+ "CONSTRAINT FK_destination_name FOREIGN KEY (destination_name)"
-					+ "REFERENCES destinations (name)," 
+					+ "REFERENCES destinations (name),"
 					+ "user_email VARCHAR(64) NOT NULL,"
-					+ "CONSTRAINT FK_user_email FOREIGN KEY (user_email)" 
+					+ "CONSTRAINT FK_user_email FOREIGN KEY (user_email)"
 					+ "REFERENCES users (email));";
 			String createCommentsTable = "CREATE TABLE comments (" // creates
 																	// comments
 																	// table
-					+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," 
+					+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 					+ "author_email VARCHAR(64) NOT NULL,"
-					+ "CONSTRAINT FK_author_email FOREIGN KEY (author_email)" 
+					+ "CONSTRAINT FK_author_email FOREIGN KEY (author_email)"
 					+ "REFERENCES users (email),"
-					+ "place_name VARCHAR(64) NOT NULL," 
+					+ "place_name VARCHAR(64) NOT NULL,"
 					+ "CONSTRAINT FK_place_name FOREIGN KEY (place_name)"
-					+ "REFERENCES destinations (name)," 
+					+ "REFERENCES destinations (name),"
 					+ "text VARCHAR(500) NOT NULL,"
 					+ "number_of_likes INT NOT NULL);";
 			String createCommentLikesTable = "CREATE TABLE comment_likes (" // creates
 																			// comment
 																			// likes
 																			// table
-					+ "commenter_email VARCHAR(64) NOT NULL," 
+					+ "commenter_email VARCHAR(64) NOT NULL,"
 					+ "comment_id INT NOT NULL,"
-					+ "CONSTRAINT FK_commenter_email FOREIGN KEY (commenter_email)" 
+					+ "CONSTRAINT FK_commenter_email FOREIGN KEY (commenter_email)"
 					+ "REFERENCES users (email),"
-					+ "CONSTRAINT FK_comment_id FOREIGN KEY (comment_id)" 
+					+ "CONSTRAINT FK_comment_id FOREIGN KEY (comment_id)"
 					+ "REFERENCES comments (id),"
 					+ "PRIMARY KEY (commenter_email, comment_id));";
 			st = this.getConnection().createStatement();
