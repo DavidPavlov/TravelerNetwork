@@ -40,7 +40,7 @@ public class UsersManager {
 	}
 	
 	public void registerUser(String firstName, String lastName, String email, String password, String description) {
-		User user = new User(firstName, lastName, password, email, description);
+		User user=new User(firstName, lastName, password, email, description);
 		registerredUsers.put(email, user); // adds the new user to the collection
 		UserDao.getInstance().saveUserToDB(user); // saves user to DB
 	}
@@ -54,8 +54,7 @@ public class UsersManager {
 		// TODO
 	}
 
-	public static boolean addDestination(User user, String name, String description, double longtitude,
-			double lattitude) {
+	public static boolean addDestination(User user, String name, String description, double longtitude, double lattitude) {
 		return true;
 		// TODO
 	}
@@ -82,6 +81,14 @@ public class UsersManager {
 		user.setDescription(description);
 		UserDao.getInstance().updateUserInDB(email, password, firstName, lastName, description); // updates the DB user:
 		return true;
+	}
+	
+	public User logIn(String email, String password) {
+		if (validateUser(email, password)) { // valid input
+			User user=registerredUsers.get(email);
+			return user;
+		}
+		return null;	
 	}
 
 	private static void printToLog(String message) {

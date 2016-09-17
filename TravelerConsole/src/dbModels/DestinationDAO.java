@@ -39,8 +39,8 @@ public class DestinationDAO {
 				while (result.next()) {
 					try {
 						destinations.add(new Destination(result.getString("name"),
-								result.getString("description"),
-								new Location(result.getDouble("latitude"), result.getDouble("longitude"))));
+						result.getString("description"),
+						new Location(result.getDouble("latitude"), result.getDouble("longitude"))));
 					} catch (InvalidCoordinatesException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -71,67 +71,67 @@ public class DestinationDAO {
 		return destinations;
 	}
 
-	public boolean saveDestinationToDB(Destination destination) {
-		String insertDestinationInfoIntoDB = "INSERT INTO users (first_name, last_name, password, email, description) VALUES (?, ?, ?, ?, ?);";
-		PreparedStatement statement = null;
-		try {
-			statement = DBManager.getInstance().getConnection().prepareStatement(insertDestinationInfoIntoDB);
-			statement.setString(1, destination.getFirstName());
-			statement.setString(2, destination.getLastName());
-			statement.setString(3, destination.getPassword());
-			statement.setString(4, destination.getEmail());
-			statement.setString(5, destination.getDescription());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (CannotConnectToDBException e) {
-			// TODO handle exception - write to log and userFriendly screen
-			e.getMessage();
-			return false;
-		} finally {
-			try {
-				if (statement != null) {
-					statement.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return true;
-	}
+//	public boolean saveDestinationToDB(Destination destination) {
+//		String insertDestinationInfoIntoDB = "INSERT INTO users (first_name, last_name, password, email, description) VALUES (?, ?, ?, ?, ?);";
+//		PreparedStatement statement = null;
+//		try {
+//			statement = DBManager.getInstance().getConnection().prepareStatement(insertDestinationInfoIntoDB);
+//			statement.setString(1, destination.getFirstName());
+//			statement.setString(2, destination.getLastName());
+//			statement.setString(3, destination.getPassword());
+//			statement.setString(4, destination.getEmail());
+//			statement.setString(5, destination.getDescription());
+//			statement.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return false;
+//		} catch (CannotConnectToDBException e) {
+//			// TODO handle exception - write to log and userFriendly screen
+//			e.getMessage();
+//			return false;
+//		} finally {
+//			try {
+//				if (statement != null) {
+//					statement.close();
+//				}
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		return true;
+//	}
 
-	public boolean updateDestinationInDB(String email, String password, String firstName, String lastName, String description) {
-		PreparedStatement prepStatement = null;
-		String updateDestinationStatement = "UPDATE users SET password=?, first_name=?, last_name=?, description=? WHERE email=?;";
-		try {
-			prepStatement = DBManager.getInstance().getConnection().prepareStatement(updateDestinationStatement);
-			prepStatement.setString(1, password);
-			prepStatement.setString(2, firstName);
-			prepStatement.setString(3, lastName);
-			prepStatement.setString(4, description);
-			prepStatement.setString(5, email);
-			prepStatement.executeUpdate();
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (CannotConnectToDBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (prepStatement != null) {
-				try {
-					prepStatement.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+//	public boolean updateDestinationInDB(String name, String description, double longitude, double lattitude) {
+//		PreparedStatement prepStatement = null;
+//		String updateDestinationStatement = "UPDATE users SET password=?, first_name=?, last_name=?, description=? WHERE email=?;";
+//		try {
+//			prepStatement = DBManager.getInstance().getConnection().prepareStatement(updateDestinationStatement);
+//			prepStatement.setString(1, password);
+//			prepStatement.setString(2, firstName);
+//			prepStatement.setString(3, lastName);
+//			prepStatement.setString(4, description);
+//			prepStatement.setString(5, email);
+//			prepStatement.executeUpdate();
+//			return true;
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return false;
+//		} catch (CannotConnectToDBException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return false;
+//		} finally {
+//			if (prepStatement != null) {
+//				try {
+//					prepStatement.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 
 }

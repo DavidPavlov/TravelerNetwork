@@ -26,7 +26,7 @@ public class LoginAgainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String email = request.getParameter("userEmail");
 		String password = request.getParameter("userPassword");
-		User user = UsersManager.logIn(email, password);
+		User user = UsersManager.getInstance().logIn(email, password);
 		if (user != null) { // the validation is successful
 			request.getSession().setAttribute("user", user); // The user is
 																// passed to the

@@ -46,4 +46,19 @@ public class Destination {
 	public ArrayList<Comment> getComments() {
 		return (ArrayList<Comment>) comments.clone();
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	
+	
 }

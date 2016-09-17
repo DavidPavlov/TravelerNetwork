@@ -14,7 +14,7 @@ public class DestinationsManager {
 	private ConcurrentHashMap<String, Destination> allDestinations;
 
 	private DestinationsManager() {
-		allDestinations = new ConcurrentHashMap<>();
+		allDestinations=new ConcurrentHashMap<>();
 		for (Destination d : DestinationDAO.getInstance().getAllDestinations()) { //adds all destinations form DB to collection
 			allDestinations.put(d.getName(), d);
 		}
@@ -22,30 +22,34 @@ public class DestinationsManager {
 
 	public static synchronized DestinationsManager getInstance() {
 		if (instance == null) {
-			instance = new DestinationsManager();
+			instance=new DestinationsManager();
 		}
 		return instance;
 	}
 
-	public boolean validateDestination(String name) { // validation of login input
+	public boolean validateDestination(String name) { // validation of input
 		if (!allDestinations.containsKey(name)) { // no such destination
 			return false;
 		}
 		return true;
 	}
 
-	public void addDestination(User u, String name, String description, double latitude, double longitude) throws InvalidCoordinatesException {
-		Destination destination = new Destination(name, description, new Location(latitude, longitude));
-		allDestinations.put(name, destination); // adds the new destination to the collection
-		DestinationDAO.getInstance().saveDestinationToDB(destination); // saves destination to DB
-	}
+//	public boolean addDestination(User u, String name, String description, double latitude, double longitude) throws InvalidCoordinatesException {
+//		if (UsersManager.getInstance().validateUser(u.getEmail(), u.getPassword())) { // if the user exists in the collection
+//			Destination destination=new Destination(name, description, new Location(latitude, longitude));
+//			allDestinations.put(name, destination); // adds the new destination to the collection
+//			DestinationDAO.getInstance().saveDestinationToDB(destination); // saves destination to DB
+//			return true;
+//		}
+//		return false; // no such user
+//	}
 
 	public static boolean addComment(User user, String comment) {
 		return true;
 		// TODO
 	}
 
-	public static boolean addHotel(User user, String name, double longtitude, double lattitude, String contact) {
+	public static boolean addHotel(User user, String name, double longitude, double lattitude, String contact) {
 		return true;
 		// TODO
 	}
@@ -56,18 +60,15 @@ public class DestinationsManager {
 		// TODO
 	}
 
-	public boolean updateDestinationInfo(String email, String password, String firstName, String lastName,
-			String description) {
-		if (!allDestinations.containsKey(email)) { // no such user
-			return false;
-		}
-		Destination destination = allDestinations.get(name); // takes the user with the input email and updates their fileds
-		destination.setPassword(password);
-		destination.setFirstName(firstName);
-		destination.setLastName(lastName);
-		destination.setDescription(description);
-		DestinationDAO.getInstance().updateDestinationInDB(email, password, firstName, lastName, description); // updates the DB user:
-		return true;
-	}
+//	public boolean updateDestinationInfo(String name, String description, double longitude, double lattitude) {
+//		if (!allDestinations.containsKey(name)) { // no such destination
+//			return false;
+//		}
+//		Destination destination = allDestinations.get(name); // takes the destination and updates its fields
+//		destination.setDescription(description);
+//		destination.setLocation(new Location(lattitude, longitude));
+//		DestinationDAO.getInstance().updateDestinationInDB(name, description, ); // updates the DB user:
+//		return true;
+//	}
 
 }
