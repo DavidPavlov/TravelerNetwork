@@ -121,7 +121,7 @@ public class UsersManager {
 		}
 		User user = registerredUsers.get(email); // takes the user with the
 													// input email and updates
-													// their fileds
+													// their fields
 		user.setPassword(password);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);

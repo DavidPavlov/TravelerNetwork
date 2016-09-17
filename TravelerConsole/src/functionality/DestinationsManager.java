@@ -12,8 +12,15 @@ public class DestinationsManager {
 
 	private static DestinationsManager instance; // Singleton
 	private ConcurrentHashMap<String, Destination> allDestinations;
+	private ConcurrentHashMap<String, String> allDestinationsAndAuthors;
 
 	private DestinationsManager() {
+		allDestinationsAndAuthors = DestinationDAO.getInstance().getAllDestinationsAndAuthors(); // adds
+																									// destinations
+																									// and
+																									// authors
+																									// to
+																									// collection
 		allDestinations = new ConcurrentHashMap<>();
 		for (Destination d : DestinationDAO.getInstance().getAllDestinations()) { // adds
 																					// all
@@ -40,22 +47,23 @@ public class DestinationsManager {
 		return true;
 	}
 
-	public boolean addDestination(User u, String name, String description, double latitude, double longitude,
+	public boolean addDestination(User user, String name, String description, double latitude, double longitude,
 			String picture) throws InvalidCoordinatesException, CloneNotSupportedException {
-		if (UsersManager.getInstance().validateUser(u.getEmail(), u.getPassword())) { // if
-																						// the
-																						// user
-																						// exists
-																						// in
-																						// the
-																						// collection
-			Destination destination = new Destination(name, description, new Location(latitude, longitude), picture);
+		if (UsersManager.getInstance().validateUser(user.getEmail(), user.getPassword())) { // if
+			// the
+			// user
+			// exists
+			// in
+			// the
+			// collection
+			Destination destination = new Destination(name, description, new Location(latitude, longitude), picture,
+					user);
 			allDestinations.put(name, destination); // adds the new destination
 													// to the collection
-			DestinationDAO.getInstance().saveDestinationToDB(u, destination); // saves
-																				// destination
-																				// to
-																				// DB
+			DestinationDAO.getInstance().saveDestinationToDB(user, destination); // saves
+																					// destination
+																					// to
+																					// DB
 			return true;
 		}
 		return false; // no such user
@@ -100,6 +108,10 @@ public class DestinationsManager {
 																												// DB
 																												// user:
 		return true;
+	}
+
+	public String getDestinationAuthor(String destinationName) {
+		return allDestinationsAndAuthors.get(destinationName);
 	}
 
 }

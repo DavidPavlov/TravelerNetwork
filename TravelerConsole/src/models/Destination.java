@@ -9,13 +9,15 @@ public class Destination {
 	private ArrayList<PlaceToSleep> placesToSleep;
 	private ArrayList<PlaceToEat> placesToEat;
 	private Location location;
+	private User author;
 	private String picture;
 
-	public Destination(String name, String description, Location location, String picture) {
+	public Destination(String name, String description, Location location, String picture, User author) {
 		this.name = name;
 		this.description = description;
 		this.location = location;
-		this.picture=picture;
+		this.picture = picture;
+		this.author = author;
 		this.comments = new ArrayList<>();
 		this.placesToSleep = new ArrayList<>();
 		this.placesToEat = new ArrayList<>();
@@ -44,11 +46,11 @@ public class Destination {
 	public Location getLocation() throws CloneNotSupportedException {
 		return (Location) location.clone();
 	}
-	
+
 	public String getPicture() {
 		return picture;
 	}
-	
+
 	public ArrayList<Comment> getComments() {
 		return (ArrayList<Comment>) comments.clone();
 	}
@@ -64,11 +66,13 @@ public class Destination {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
+
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	
-	
-	
+
+	public User getAuthor() {
+		return author;
+	}
+
 }
