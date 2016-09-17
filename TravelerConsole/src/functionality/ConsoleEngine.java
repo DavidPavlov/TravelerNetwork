@@ -5,7 +5,6 @@ import java.util.HashMap;
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidCoordinatesException;
 import exceptions.InvalidDataException;
-import models.Comment;
 import models.Destination;
 import models.Location;
 import models.PlaceToEat;
@@ -227,7 +226,8 @@ public class ConsoleEngine {
 		if (sb.toString().trim().isEmpty()) {
 			return "Empty comment";
 		}
-		this.destinations.get(destinationName).addComment(new Comment(sb.toString().trim(), this.currentUser));
+		// this.destinations.get(destinationName).addComment(new
+		// Comment(sb.toString().trim(), this.currentUser));
 		return "Comment added succesfully";
 	}
 }

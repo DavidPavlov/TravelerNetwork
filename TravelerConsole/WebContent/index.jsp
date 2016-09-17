@@ -37,15 +37,13 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					
-					
-							<li><a href="sidebar-left.html">Left Sidebar</a></li>
+					<li class="active"><a href="#">Home</a></li>					
+							<li><a href="AllDestinations.jsp">Destinations</a></li>
 							
-					<li><a href="contact.html">Contact</a></li>
 					<%if(request.getSession().getAttribute("user") == null){ %>
 						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
 					<%}else{ %>
+						<li><a class="btn" href="LogoutServlet">Logout</a></li>
 						<li><a class="btn" href="profile.jsp">PROFILE</a></li>
 					<%} %>
 				</ul>

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import = "models.*" %>
-<%@ page import = "java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -9,8 +7,10 @@
 	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author"      content="David & Yasen">
-	<title>The Traveler Bulgaria</title>
 	
+	<title>The Traveler Bulgaria</title>
+
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -55,102 +55,65 @@
 
 	<!-- container -->
 	<div class="container">
-		
+
 		<ol class="breadcrumb">
 			<li><a href="index.html">Home</a></li>
-			<li class="active">Profile Page</li>
+			<li class="active">About</li>
 		</ol>
 
 		<div class="row">
 			
-			<!-- Sidebar -->
-			<aside class="col-md-4 sidebar sidebar-left">
-
-				<div class="row widget">
-					<div class="col-xs-12">											
-						<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
-						<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
-					</div>
-				</div>
-				<div class="row widget">
-					<div class="col-xs-12">						
-						<p><img src="PictureServlet" height="150" width="150" alt=""></p>
-					</div>
-				</div>
-				<div class="row widget">
-					<div class="col-xs-12">						
-						<a class="btn" href="AddDestination.jsp">Add Destination</a>
-					</div>
-				</div>
-
-			</aside>
-			<!-- /Sidebar -->
-
 			<!-- Article main content -->
-			<article class="col-md-8 maincontent">
+			<article class="col-sm-9 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Visited Destinations</h1>
+					<h1 class="page-title">New Destination</h1>
 				</header>
-					<% ArrayList<Destination> visitedDestinations =  ((User)request.getSession().getAttribute("user")).getVisitedPlaces();%>
-					<table>
-						<%! int count = 1; %>
-						<tr>
-						<%for(Destination dest : visitedDestinations){ %>
-							<%if(count%3==0){ %>
-								</tr><tr>
-							<%} %>
-							<td><%out.println(dest.getName()); %><img src="DestinationPictureServlet?destination=<%= dest.getName()%>"/></td>
-						<%} %>
-					</table>
-				</article>
+				
+				<p>
+					Share your experience and photos of a destination you have visited.
+				</p>
+				<br>
+					<form action="AddDestinationServlet" method="POST" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-sm-4">
+								<input name="name" class="form-control" type="text" placeholder="Name">
+							</div>
+							<div class="col-sm-4">
+								<input name="long" class="form-control" type="text" placeholder="Longitude">
+							</div>
+							<div class="col-sm-4">
+								<input name="lat" class="form-control" type="text" placeholder="Latitude">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<textarea name="description" placeholder="Type your experience here" class="form-control" rows="9"></textarea>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-6">
+								<input name="picture" type="file" class="form-control" placeholder="Insert Picture">
+							</div>
+							<div class="col-sm-6 text-right">
+								<input class="btn btn-action" type="submit" value="Send message">
+							</div>
+						</div>
+						<div class="row" id="map" style="width:100% height:100%"></div>
+					</form>
+					
+			</article>
 			<!-- /Article -->
+			
 
 		</div>
 	</div>	<!-- /container -->
 	
+	
 
 	<footer id="footer" class="top-space">
-
-		<div class="footer1">
-			<div class="container">
-				<div class="row">
-					
-					<div class="col-md-3 widget">
-						<h3 class="widget-title">Contact</h3>
-						<div class="widget-body">
-							<p>+234 23 9873237<br>
-								<a href="mailto:#">some.email@somewhere.com</a><br>
-								<br>
-								234 Hidden Pond Road, Ashland City, TN 37015
-							</p>	
-						</div>
-					</div>
-
-					<div class="col-md-3 widget">
-						<h3 class="widget-title">Follow me</h3>
-						<div class="widget-body">
-							<p class="follow-me-icons">
-								<a href=""><i class="fa fa-twitter fa-2"></i></a>
-								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
-								<a href=""><i class="fa fa-github fa-2"></i></a>
-								<a href=""><i class="fa fa-facebook fa-2"></i></a>
-							</p>	
-						</div>
-					</div>
-
-					<div class="col-md-6 widget">
-						<h3 class="widget-title">Text widget</h3>
-						<div class="widget-body">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-							<p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
-						</div>
-					</div>
-
-				</div> <!-- /row of widgets -->
-			</div>
-		</div>
-
-		<div class="footer2">
+			<div class="footer2">
 			<div class="container">
 				<div class="row">
 					
@@ -177,7 +140,7 @@
 				</div> <!-- /row of widgets -->
 			</div>
 		</div>
-	</footer>	
+		</footer>	
 		
 
 
@@ -189,5 +152,30 @@
 	<script src="assets/js/headroom.min.js"></script>
 	<script src="assets/js/jQuery.headroom.min.js"></script>
 	<script src="assets/js/template.js"></script>
+	
+	<!-- Google Maps -->
+	<script>
+		function myMap() {
+			var myCenter = new google.maps.LatLng(42.70,23.33);
+			  var mapCanvas = document.getElementById("map");
+			  var mapOptions = {
+				  	center: myCenter, zoom: 7,
+				    panControl: true,
+				    zoomControl: true,
+				    mapTypeControl: true,
+				    scaleControl: true,
+				    streetViewControl: true,
+				    overviewMapControl: true,
+				    rotateControl: true
+				}
+			  
+			  var map = new google.maps.Map(mapCanvas, mapOptions);
+			  var marker = new google.maps.Marker({position:myCenter});
+			  marker.setMap(map);
+		}
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKyIgPewrgRCgagA1sDItFSRZh5hZlL4&callback=myMap"></script>
+	
+
 </body>
 </html>

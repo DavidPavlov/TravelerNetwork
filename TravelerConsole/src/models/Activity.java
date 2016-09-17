@@ -1,6 +1,5 @@
 package models;
 
-
 import exceptions.InvalidDataException;
 import exceptions.InvalidLocationException;
 
@@ -11,8 +10,9 @@ public class Activity {
 	private String workingHours;
 	private Location location;
 	private String description;
-	
-	public Activity(String name, double price, String workingHours, Location location, String description) throws InvalidDataException, InvalidLocationException {
+
+	public Activity(String name, double price, String workingHours, Location location, String description)
+			throws InvalidDataException, InvalidLocationException {
 		super();
 		this.setName(name);
 		this.setPrice(price);
@@ -44,7 +44,7 @@ public class Activity {
 	public String getWorkingHours() {
 		return workingHours;
 	}
-	
+
 	public void setWorkingHours(String workingHours) throws InvalidDataException {
 		if (!(name == null || name.isEmpty())) {
 			this.workingHours = workingHours;
@@ -54,7 +54,7 @@ public class Activity {
 	}
 
 	public Location getLocation() throws CloneNotSupportedException {
-		return (Location) location.clone();
+		return location;
 	}
 
 	public void setLocation(Location location) throws InvalidLocationException {
@@ -63,7 +63,7 @@ public class Activity {
 		} else {
 			throw new InvalidLocationException();
 		}
-		
+
 	}
 
 	public String getDescription() {
@@ -71,7 +71,7 @@ public class Activity {
 	}
 
 	public void setDescription(String description) {
-		if (description!=null && !description.isEmpty()) {
+		if (description != null && !description.isEmpty()) {
 			this.description = description;
 		}
 	}

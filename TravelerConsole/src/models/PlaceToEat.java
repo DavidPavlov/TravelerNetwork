@@ -21,7 +21,7 @@ public class PlaceToEat {
 	}
 
 	public Location getLocation() throws CloneNotSupportedException {
-		return (Location) location.clone();
+		return location;
 	}
 
 }

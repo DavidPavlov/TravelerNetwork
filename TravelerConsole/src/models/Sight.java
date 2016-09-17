@@ -7,8 +7,9 @@ public class Sight {
 	private String name;
 	private Location location;
 	private String description;
-	
-	public Sight(String name, Location location, String description) throws InvalidDataException, InvalidLocationException {
+
+	public Sight(String name, Location location, String description)
+			throws InvalidDataException, InvalidLocationException {
 		super();
 		this.setName(name);
 		this.setLocation(location);
@@ -28,7 +29,7 @@ public class Sight {
 	}
 
 	public Location getLocation() throws CloneNotSupportedException {
-		return (Location) location.clone();
+		return location;
 	}
 
 	public void setLocation(Location location) throws InvalidLocationException {
@@ -44,9 +45,9 @@ public class Sight {
 	}
 
 	public void setDescription(String description) {
-		if (description!=null && !description.isEmpty()) {
+		if (description != null && !description.isEmpty()) {
 			this.description = description;
 		}
 	}
-	
+
 }
