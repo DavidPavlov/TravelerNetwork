@@ -67,8 +67,7 @@
 			<aside class="col-md-4 sidebar sidebar-left">
 
 				<div class="row widget">
-					<div class="col-xs-12">	
-										
+					<div class="col-xs-12">											
 						<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
 						<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
 					</div>

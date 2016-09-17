@@ -13,14 +13,25 @@ public class User implements Cloneable {
 	private String email;
 	private String description;
 	private ArrayList<Destination> visitedPlaces;
+	private String profilePic;
 
-	public User(String firstName, String lastName, String password, String email, String description){
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.password=password;
-		this.email=email;
+	public User(String firstName, String lastName, String password, String email, String description,
+			String profilePic) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
 		this.description = description;
 		this.visitedPlaces = new ArrayList<>();
+		this.profilePic = profilePic;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	public String getFirstName() {

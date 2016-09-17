@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import functionality.UsersManager;
 
 /**
- * Servlet implementation class RegAgainServlet
+ * We will not USE this servlet anymore.
  */
 @WebServlet("/register")
+@MultipartConfig
 public class RegAgainServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -36,7 +38,7 @@ public class RegAgainServlet extends HttpServlet {
 		String description = request.getParameter("userDescription");
 		if (validateData(firstName, lastName, email, inputPassword)) {
 
-			UsersManager.getInstance().registerUser(firstName, lastName, email, inputPassword, description);
+			UsersManager.getInstance().registerUser(firstName, lastName, email, inputPassword, description, null);
 			System.out.println("User Registration Successful!");
 			response.sendRedirect("SuccRegPage.html");
 		} else {
