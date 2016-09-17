@@ -34,15 +34,15 @@ public class DestinationsManager {
 		return true;
 	}
 
-//	public boolean addDestination(User u, String name, String description, double latitude, double longitude) throws InvalidCoordinatesException {
-//		if (UsersManager.getInstance().validateUser(u.getEmail(), u.getPassword())) { // if the user exists in the collection
-//			Destination destination=new Destination(name, description, new Location(latitude, longitude));
-//			allDestinations.put(name, destination); // adds the new destination to the collection
-//			DestinationDAO.getInstance().saveDestinationToDB(destination); // saves destination to DB
-//			return true;
-//		}
-//		return false; // no such user
-//	}
+	public boolean addDestination(User u, String name, String description, double latitude, double longitude, String picture) throws InvalidCoordinatesException, CloneNotSupportedException {
+		if (UsersManager.getInstance().validateUser(u.getEmail(), u.getPassword())) { // if the user exists in the collection
+			Destination destination=new Destination(name, description, new Location(latitude, longitude), picture);
+			allDestinations.put(name, destination); // adds the new destination to the collection
+			DestinationDAO.getInstance().saveDestinationToDB(u, destination); // saves destination to DB
+			return true;
+		}
+		return false; // no such user
+	}
 
 	public static boolean addComment(User user, String comment) {
 		return true;
@@ -54,21 +54,20 @@ public class DestinationsManager {
 		// TODO
 	}
 
-	public static boolean addResturant(User user, String name, double longtitude, double lattitude,
-			String workingHours) {
+	public static boolean addResturant(User user, String name, double longtitude, double lattitude, String workingHours) {
 		return true;
 		// TODO
 	}
 
-//	public boolean updateDestinationInfo(String name, String description, double longitude, double lattitude) {
-//		if (!allDestinations.containsKey(name)) { // no such destination
-//			return false;
-//		}
-//		Destination destination = allDestinations.get(name); // takes the destination and updates its fields
-//		destination.setDescription(description);
-//		destination.setLocation(new Location(lattitude, longitude));
-//		DestinationDAO.getInstance().updateDestinationInDB(name, description, ); // updates the DB user:
-//		return true;
-//	}
+	public boolean updateDestinationInfo(String name, String description, double longitude, double lattitude, String picture) throws InvalidCoordinatesException {
+		if (!allDestinations.containsKey(name)) { // no such destination
+			return false;
+		}
+		Destination destination = allDestinations.get(name); // takes the destination and updates its fields
+		destination.setDescription(description);
+		destination.setLocation(new Location(lattitude, longitude));
+		DestinationDAO.getInstance().updateDestinationInDB(name, description, longitude, lattitude, picture); // updates the DB user:
+		return true;
+	}
 
 }

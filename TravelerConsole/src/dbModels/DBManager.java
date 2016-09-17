@@ -22,7 +22,6 @@ class DBManager {
 
 	private DBManager() {
 		try {
-			System.out.println("Creating the DBManager!!!!");
 			Class.forName("com.mysql.jdbc.Driver"); // DriverManager
 			setConnection(DriverManager.getConnection(commonURL, DB_USERNAME, DB_PASSWORD));
 			if (!checkDBExists(DB_NAME)) { // checks if the DB schema exists
@@ -32,7 +31,6 @@ class DBManager {
 			setConnection(DriverManager.getConnection(URL, DB_USERNAME, DB_PASSWORD)); // establishing
 																						// a
 																						// connection
-			System.out.println("DBManager is created!!!!");
 		} catch (ClassNotFoundException e) {
 			// TODO handle exception
 			e.printStackTrace();
@@ -57,7 +55,6 @@ class DBManager {
 	}
 
 	private boolean checkDBExists(String dbName) {
-		System.out.println("Checking if Schema exists!!!!");
 		ResultSet resultSet = null;
 		try {
 			resultSet = this.getConnection().getMetaData().getCatalogs(); // retrieving
@@ -69,11 +66,9 @@ class DBManager {
 			while (resultSet.next()) {
 				String databaseName = resultSet.getString(1);
 				if (databaseName.equals(dbName)) {
-					System.out.println("The Schema exists!!!!");
 					return true;
 				}
 			}
-			System.out.println("No such Schema!!!!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,7 +89,6 @@ class DBManager {
 	}
 
 	private void makeDBAndTables() {
-		System.out.println("Making the new Schema!!!!");
 		Statement st = null;
 		try {
 			this.getConnection().setAutoCommit(false); // stop auto committing
@@ -103,36 +97,51 @@ class DBManager {
 			String createDestinationsTable = "CREATE TABLE destinations " // creates
 																			// destinations
 																			// table
-					+ "(name VARCHAR(64) NOT NULL PRIMARY KEY, " + "description VARCHAR(500) NOT NULL, "
-					+ "longitude VARCHAR(20) NOT NULL, " + "lattitude VARCHAR(20) NOT NULL);";
+					+ "(name VARCHAR(64) NOT NULL PRIMARY KEY, " 
+					+ "description VARCHAR(500) NOT NULL, "
+					+ "longitude VARCHAR(20) NOT NULL, " 
+					+ "lattitude VARCHAR(20) NOT NULL);"
+					+ "picture VARCHAR(100)";
 			String createUsersTable = "CREATE TABLE users " // creates users
 															// table
-					+ "(email VARCHAR(64) NOT NULL PRIMARY KEY," + "password VARCHAR(64) NOT NULL,"
-					+ "first_name VARCHAR(64) NOT NULL," + "last_name VARCHAR(64) NOT NULL,"
-					+ "description VARCHAR(500) NOT NULL);" + "profilePic VARCHAR(100)";
+					+ "(email VARCHAR(64) NOT NULL PRIMARY KEY," 
+					+ "password VARCHAR(64) NOT NULL,"
+					+ "first_name VARCHAR(64) NOT NULL,"
+					+ "last_name VARCHAR(64) NOT NULL,"
+					+ "description VARCHAR(500) NOT NULL);" 
+					+ "profilePic VARCHAR(100)";
 			String createVisitedDestinationsTable = "CREATE TABLE visited_destinations (" // creates
 																							// visited
 																							// destinations...
 					+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," // ...table
 					+ "destination_name VARCHAR(64) NOT NULL,"
 					+ "CONSTRAINT FK_destination_name FOREIGN KEY (destination_name)"
-					+ "REFERENCES destinations (name)," + "user_email VARCHAR(64) NOT NULL,"
-					+ "CONSTRAINT FK_user_email FOREIGN KEY (user_email)" + "REFERENCES users (email));";
+					+ "REFERENCES destinations (name)," 
+					+ "user_email VARCHAR(64) NOT NULL,"
+					+ "CONSTRAINT FK_user_email FOREIGN KEY (user_email)" 
+					+ "REFERENCES users (email));";
 			String createCommentsTable = "CREATE TABLE comments (" // creates
 																	// comments
 																	// table
-					+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," + "author_email VARCHAR(64) NOT NULL,"
-					+ "CONSTRAINT FK_author_email FOREIGN KEY (author_email)" + "REFERENCES users (email),"
-					+ "place_name VARCHAR(64) NOT NULL," + "CONSTRAINT FK_place_name FOREIGN KEY (place_name)"
-					+ "REFERENCES destinations (name)," + "text VARCHAR(500) NOT NULL,"
+					+ "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," 
+					+ "author_email VARCHAR(64) NOT NULL,"
+					+ "CONSTRAINT FK_author_email FOREIGN KEY (author_email)" 
+					+ "REFERENCES users (email),"
+					+ "place_name VARCHAR(64) NOT NULL," 
+					+ "CONSTRAINT FK_place_name FOREIGN KEY (place_name)"
+					+ "REFERENCES destinations (name)," 
+					+ "text VARCHAR(500) NOT NULL,"
 					+ "number_of_likes INT NOT NULL);";
 			String createCommentLikesTable = "CREATE TABLE comment_likes (" // creates
 																			// comment
 																			// likes
 																			// table
-					+ "commenter_email VARCHAR(64) NOT NULL," + "comment_id INT NOT NULL,"
-					+ "CONSTRAINT FK_commenter_email FOREIGN KEY (commenter_email)" + "REFERENCES users (email),"
-					+ "CONSTRAINT FK_comment_id FOREIGN KEY (comment_id)" + "REFERENCES comments (id),"
+					+ "commenter_email VARCHAR(64) NOT NULL," 
+					+ "comment_id INT NOT NULL,"
+					+ "CONSTRAINT FK_commenter_email FOREIGN KEY (commenter_email)" 
+					+ "REFERENCES users (email),"
+					+ "CONSTRAINT FK_comment_id FOREIGN KEY (comment_id)" 
+					+ "REFERENCES comments (id),"
 					+ "PRIMARY KEY (commenter_email, comment_id));";
 			st = this.getConnection().createStatement();
 			st.executeUpdate(createSchema);
@@ -143,7 +152,6 @@ class DBManager {
 			st.executeUpdate(createCommentsTable);
 			st.executeUpdate(createCommentLikesTable);
 			this.getConnection().commit(); // commit the two statements
-			System.out.println("New Schema made!!!!");
 		} catch (CannotConnectToDBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

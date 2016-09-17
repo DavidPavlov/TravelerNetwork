@@ -9,11 +9,13 @@ public class Destination {
 	private ArrayList<PlaceToSleep> placesToSleep;
 	private ArrayList<PlaceToEat> placesToEat;
 	private Location location;
+	private String picture;
 
-	public Destination(String name, String description, Location location) {
+	public Destination(String name, String description, Location location, String picture) {
 		this.name = name;
 		this.description = description;
 		this.location = location;
+		this.picture=picture;
 		this.comments = new ArrayList<>();
 		this.placesToSleep = new ArrayList<>();
 		this.placesToEat = new ArrayList<>();
@@ -43,6 +45,10 @@ public class Destination {
 		return (Location) location.clone();
 	}
 	
+	public String getPicture() {
+		return picture;
+	}
+	
 	public ArrayList<Comment> getComments() {
 		return (ArrayList<Comment>) comments.clone();
 	}
@@ -57,6 +63,10 @@ public class Destination {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 	
 	
