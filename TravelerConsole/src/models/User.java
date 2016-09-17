@@ -2,9 +2,6 @@ package models;
 
 import java.util.ArrayList;
 
-import exceptions.InvalidAuthorException;
-import exceptions.InvalidDataException;
-
 public class User implements Cloneable {
 
 	private String firstName;
@@ -55,7 +52,7 @@ public class User implements Cloneable {
 	}
 
 	public ArrayList<Destination> getVisitedPlaces() {
-		return (ArrayList<Destination>) this.visitedPlaces.clone();
+		return (ArrayList<Destination>) this.visitedPlaces;
 	}
 
 	public void setFirstName(String firstName) {
@@ -76,37 +73,6 @@ public class User implements Cloneable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public void makeAComment(Destination destination, String text) throws InvalidDataException, InvalidAuthorException {
-		destination.addComment(new Comment(text, this));
-	}
-
-	public void likeAComment(Comment comment) {
-		if (comment != null) {
-			ArrayList<User> userLikersOfComment = comment.getUserLikers(); // all
-																			// the
-																			// users
-																			// who
-																			// like
-																			// the
-																			// comment
-			for (int i = 0; i < userLikersOfComment.size(); i++) {
-				if (userLikersOfComment.get(i) == this) { // if the current user
-															// has already liked
-															// the comment
-					return; // do nothing
-				}
-			}
-			comment.addLike(); // the comment is liked
-			comment.addUserLiker(this); // the user is added to the list of
-										// users who like the comment
-		}
-	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
 	}
 
 }

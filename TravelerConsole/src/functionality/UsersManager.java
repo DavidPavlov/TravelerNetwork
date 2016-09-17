@@ -5,9 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 import dbModels.UserDao;
+import exceptions.InvalidAuthorException;
+import exceptions.InvalidDataException;
+import models.Comment;
 import models.Destination;
 import models.User;
 
@@ -23,7 +27,7 @@ public class UsersManager {
 	private UsersManager() {
 		registerredUsers = new ConcurrentHashMap<>();
 		for (User u : UserDao.getInstance().getAllUsers()) { // adds all users
-																// form DB to
+																// from DB to
 																// collection
 			registerredUsers.put(u.getEmail(), u);
 		}
@@ -72,15 +76,31 @@ public class UsersManager {
 		user.getVisitedPlaces().add(destination);
 	}
 
-	public static boolean addComment(User user, String comment) {
+	public boolean addComment(User user, String destinationName, String text) {
+		if (!registerredUsers.containsKey(user)) {
+			return false;
+		}
+		try {
+			Comment comment = new Comment(user.getEmail(), destinationName, text, 0);
+			CommentsManager.getInstance().saveComment(user, destinationName, text, 0);
+			DestinationsManager.getInstance().getDestinationFromCache(destinationName).addComment(comment); // adds
+																											// the
+																											// comment
+																											// to
+																											// the
+																											// destination
+
+		} catch (InvalidDataException | InvalidAuthorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
-		// TODO
 	}
 
 	public static boolean addDestination(User user, String name, String description, double longtitude,
 			double lattitude) {
 		return true;
-		// TODO
+		// TODO!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
 	public static boolean addHotel(User user, String name, double longtitude, double lattitude, String contact) {
@@ -120,6 +140,41 @@ public class UsersManager {
 			return user;
 		}
 		return null;
+	}
+
+	public User getUserFromCache(String userEmail) {
+		if (!registerredUsers.containsKey(userEmail)) {
+			return null; // no such user
+		}
+		return registerredUsers.get(userEmail); // returns the user
+	}
+
+	public boolean addUserToComment(User user, Comment comment) {
+		if (registerredUsers.contains(user)) {
+			comment.setAuthor(user);
+			return true;
+		}
+		return false;
+	}
+
+	public void likeAComment(User user, Comment comment) {
+		ArrayList<User> userLikersOfComment = comment.getUserLikers(); // all
+																		// the
+																		// users
+																		// who
+																		// like
+																		// the
+																		// comment
+		for (int i = 0; i < userLikersOfComment.size(); i++) {
+			if (userLikersOfComment.get(i) == user) { // if the current user
+														// has already liked
+														// the comment
+				return; // do nothing
+			}
+		}
+		comment.addLike(); // the comment is liked
+		comment.addUserLiker(user); // the user is added to the list of
+									// users who like the comment
 	}
 
 	private static void printToLog(String message) {

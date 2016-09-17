@@ -4,35 +4,33 @@ import java.util.ArrayList;
 
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidDataException;
+import functionality.UsersManager;
 
 public class Comment {
 
-	private static int id;
-
+	private User author;
+	private String placeName;
 	private String text;
 	private int numberOfLikes;
-	private int idNumber;
-	private User author;
 	private ArrayList<User> userLikers; // List of users who like the comment
 
-	public Comment(String text, User author) throws InvalidDataException, InvalidAuthorException {
+	public Comment(String authorEmail, String placeName, String text, int numberOfLikes)
+			throws InvalidDataException, InvalidAuthorException {
+		setAuthor(UsersManager.getInstance().getUserFromCache(authorEmail));
+		this.placeName = placeName;
 		this.setText(text);
-		setAuthor(author);
+		this.numberOfLikes = numberOfLikes;
 		this.userLikers = new ArrayList<>();
-		this.idNumber = id;
-		id++;
 	}
 
-	public void setAuthor(User author) throws InvalidAuthorException {
+	public void setAuthor(User author) {
 		if (author != null) {
 			this.author = author;
-		} else {
-			throw new InvalidAuthorException();
 		}
 	}
 
-	public User getAuthor() throws CloneNotSupportedException {
-		return (User) author.clone();
+	public User getAuthor() {
+		return (User) author;
 	}
 
 	public String getText() {
@@ -51,10 +49,6 @@ public class Comment {
 		return numberOfLikes;
 	}
 
-	public int getIdNumber() {
-		return idNumber;
-	}
-
 	public void addLike() {
 		this.numberOfLikes++;
 	}
@@ -70,6 +64,18 @@ public class Comment {
 			}
 		}
 		userLikers.add(user);
+	}
+
+	public String getPlaceName() {
+		return placeName;
+	}
+
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+
+	public void setNumberOfLikes(int numberOfLikes) {
+		this.numberOfLikes = numberOfLikes;
 	}
 
 }
