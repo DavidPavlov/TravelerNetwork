@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ page import = "models.*" %>
+<%@ page import = "java.util.ArrayList" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -6,9 +10,8 @@
 	<meta name="description" content="">
 	<meta name="author"      content="David & Yasen">
 	
-	<title>Sign in - Progressus Bootstrap template</title>
+	<title>The Traveler Bulgaria</title>
 
-	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -27,18 +30,21 @@
 
 <body>
 	<!-- Fixed navbar -->
+	<%if(request.getSession().getAttribute("user")==null){ %>
+		<%response.sendRedirect("index.jsp"); %>
+	<%} %>
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo4.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo4.png" alt="The Traveler Bulgaria"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>					
 					
-					<li class="active"><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+					<li><a class="btn" href="profile.jsp">PROFILE</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -49,54 +55,48 @@
 
 	<!-- container -->
 	<div class="container">
-
+		
 		<ol class="breadcrumb">
 			<li><a href="index.html">Home</a></li>
-			<li class="active">User access</li>
+			<li class="active">Profile Page</li>
 		</ol>
 
 		<div class="row">
 			
-			<!-- Article main content -->
-			<article class="col-xs-12 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">Sign in</h1>
-				</header>
-				
-				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<h3 class="thin text-center">Sign in to your account</h3>
-							<p class="text-center text-muted"><a href="signup.html">Register</a></p>
-							<hr>
-							
-							<form action="login" method="POST">
-								<div class="top-margin">
-									<label>Email <span class="text-danger">*</span></label>
-									<input type="text" name="userEmail" class="form-control">
-								</div>
-								<div class="top-margin">
-									<label>Password <span class="text-danger">*</span></label>
-									<input type="password" name="userPassword" class="form-control">
-								</div>
+			<!-- Sidebar -->
+			<aside class="col-md-4 sidebar sidebar-left">
 
-								<hr>
-
-								<div class="row">
-									<div class="col-lg-8">
-										<b><a href="">Forgot password?</a></b>
-									</div>
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Sign in</button>
-									</div>
-								</div>
-							</form>
-						</div>
+				<div class="row widget">
+					<div class="col-xs-12">	
+										
+						<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
+						<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
 					</div>
-
 				</div>
-				
-			</article>
+				<div class="row widget">
+					<div class="col-xs-12">						
+						<p><img src="PictureServlet" alt=""></p>
+					</div>
+				</div>
+				<div class="row widget">
+					
+				</div>
+
+			</aside>
+			<!-- /Sidebar -->
+
+			<!-- Article main content -->
+			<article class="col-md-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Visited Destinations</h1>
+				</header>
+					<% ArrayList<Destination> visitedDestinations =  ((User)request.getSession().getAttribute("user")).getVisitedPlaces();%>
+					<table>
+						<%for(Destination dest : visitedDestinations){ %>
+							
+						<%} %>
+					</table>
+				</article>
 			<!-- /Article -->
 
 		</div>
@@ -123,7 +123,7 @@
 					<div class="col-md-3 widget">
 						<h3 class="widget-title">Follow me</h3>
 						<div class="widget-body">
-							<p class="follow-me-icons clearfix">
+							<p class="follow-me-icons">
 								<a href=""><i class="fa fa-twitter fa-2"></i></a>
 								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
 								<a href=""><i class="fa fa-github fa-2"></i></a>

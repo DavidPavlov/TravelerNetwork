@@ -34,10 +34,10 @@ public class RegistrationServlet extends HttpServlet {
 		if (validateData(firstName, lastName, email, inputPassword)) {
 			UsersManager.getInstance().registerUser(firstName, lastName, email, inputPassword, description);
 			System.out.println("User Registration Successful!");
-			response.sendRedirect("SuccRegPage.html");
+			response.sendRedirect("index.jsp");
 		} else {
 			System.out.println("Registration failed! Password is incorrect!");
-			RequestDispatcher view = request.getRequestDispatcher("RegAgainPage.html");
+			RequestDispatcher view = request.getRequestDispatcher("signup.html");
 			view.forward(request, response);
 		}
 	}

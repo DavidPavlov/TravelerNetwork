@@ -33,7 +33,7 @@
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo4.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo4.png" alt="The Traveler Bulgaria"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
@@ -44,9 +44,9 @@
 							
 					<li><a href="contact.html">Contact</a></li>
 					<%if(request.getSession().getAttribute("user") == null){ %>
-					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
 					<%}else{ %>
-					<li><a class="btn" href="profile.jsp">PROFILE</a></li>
+						<li><a class="btn" href="profile.jsp">PROFILE</a></li>
 					<%} %>
 				</ul>
 			</div><!--/.nav-collapse -->
