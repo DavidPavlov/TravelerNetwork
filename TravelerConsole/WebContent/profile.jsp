@@ -102,7 +102,12 @@
 					
 					<table>			
 						<%for(Destination dest : visitedDestinations){ %>
-						<tr><td><img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150" alt=""/></td></tr>
+						<tr>
+							<td>
+								<h5><a href="Destination.jsp?name=<%= dest.getName()%>"><%=dest.getName() %></a></h5>
+								<img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150" alt=""/>
+							</td>
+						</tr>
 						<%} %>
 						
 					</table>

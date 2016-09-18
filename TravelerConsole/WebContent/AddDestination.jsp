@@ -57,8 +57,8 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
-			<li class="active">About</li>
+			<li><a href="index.jsp">Home</a></li>
+			<li class="active">Add Destination</li>
 		</ol>
 
 		<div class="row">
@@ -97,7 +97,7 @@
 								<input name="picture" type="file" class="form-control" placeholder="Insert Picture">
 							</div>
 							<div class="col-sm-6 text-right">
-								<input class="btn btn-action" type="submit" value="Send message">
+								<input class="btn btn-action" type="submit" value="Add Destination">
 							</div>
 						</div>
 						<div class="row" id="map" style="width:100% height:100%"></div>

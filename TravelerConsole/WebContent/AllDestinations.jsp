@@ -110,7 +110,10 @@
 								</tr>
 								<tr>
 							<%} %>
-							<td><%= dest.getName() %><br><img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150"/></td>
+							<td>
+								<h5><a href="Destination.jsp?name=<%= dest.getName()%>"><%=dest.getName() %></a></h5>
+								<img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150"/>
+							</td>
 						<%} %>
 						</tr>
 					</table>

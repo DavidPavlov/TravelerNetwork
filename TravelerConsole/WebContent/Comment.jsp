@@ -1,8 +1,5 @@
-<%@page import="functionality.DestinationsManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import = "models.*" %>
-<%@ page import = "java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -10,8 +7,9 @@
 	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author"      content="David & Yasen">
-	<title>The Traveler Bulgaria</title>
 	
+	<title>Contact us - Progressus Bootstrap template</title>
+
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -31,10 +29,9 @@
 
 <body>
 	<!-- Fixed navbar -->
-	<%if (request.getParameter("name") == null){ %>
+	<%if(request.getSession().getAttribute("user")==null){ %>
 		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
 	<%} %>
-	
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
@@ -46,12 +43,8 @@
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="index.jsp">Home</a></li>					
 					<li><a href="AllDestinations.jsp">Destinations</a></li>
-					<%if(request.getSession().getAttribute("user") == null){ %>
-						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
-					<%}else{ %>
-						<li><a class="btn" href="LogoutServlet">Logout</a></li>
-						<li><a class="btn" href="profile.jsp">PROFILE</a></li>
-					<%} %>
+					<li><a class="btn" href="LogoutServlet">Logout</a></li>
+					<li><a class="btn" href="profile.jsp">PROFILE</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -62,59 +55,77 @@
 
 	<!-- container -->
 	<div class="container">
-		
+
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
-			<li class="active">Profile Page</li>
+			<li><a href="index.jsp">Home</a></li>
+			<li class="active">Comment</li>
 		</ol>
 
 		<div class="row">
 			
-			<!-- Sidebar -->
-			<aside class="col-md-4 sidebar sidebar-left">
-						<% Destination dest = DestinationsManager.getInstance().getDestinationFromCache(request.getParameter("name")); %>
-						<%if(dest == null){ %>
-							<%request.getRequestDispatcher("AllDestinations.jsp").forward(request, response); %>
-							
-						<%} %>
-				<div class="row widget">
-					<div class="col-xs-12">	
-							<h4><%out.println(request.getParameter("name")); %></h4>					
-						
-					</div>
-				</div>
-				<div class="row widget">
-					<div class="col-xs-12">						
-						<p><img src="DestinationPictureServlet?destination=<%=request.getParameter("name") %>" height="150" width="150" alt=""></p>
-					</div>
-				</div>
-				<div class="row widget">
-					<div class="col-xs-12">						
-						<a class="btn" href="Comment.jsp">Add Comment</a>
-					</div>
-				</div>
+			<!-- Article main content -->
+			<article class="col-sm-9 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Contact us</h1>
+				</header>
 				
+				<p>
+					We’d love to hear from you. Interested in working together? Fill out the form below with some info about your project and I will get back to you as soon as I can. Please allow a couple days for me to respond.
+				</p>
+				<br>
+					<form>
+						<div class="row">
+							<div class="col-sm-4">
+								<input class="form-control" type="text" placeholder="Name">
+							</div>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" placeholder="Email">
+							</div>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" placeholder="Phone">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<textarea placeholder="Type your message here..." class="form-control" rows="9"></textarea>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-6">
+								<label class="checkbox"><input type="checkbox"> Sign up for newsletter</label>
+							</div>
+							<div class="col-sm-6 text-right">
+								<input class="btn btn-action" type="submit" value="Send message">
+							</div>
+						</div>
+					</form>
+
+			</article>
+			<!-- /Article -->
+			
+			<!-- Sidebar -->
+			<aside class="col-sm-3 sidebar sidebar-right">
+
+				<div class="widget">
+					<h4>Address</h4>
+					<address>
+						2002 Holcombe Boulevard, Houston, TX 77030, USA
+					</address>
+					<h4>Phone:</h4>
+					<address>
+						(713) 791-1414
+					</address>
+				</div>
 
 			</aside>
 			<!-- /Sidebar -->
 
-			<!-- Article main content -->
-			<article class="col-md-8 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">Description</h1>
-				</header>
-					<h4><%out.print(dest.getDescription()); %></h4>
-					
-				</article>
-			<!-- /Article -->
-
 		</div>
-		<div id="map" style="width:100% height:100%"></div>
 	</div>	<!-- /container -->
-	
-	
 
-	<footer id="footer" class="top-space">
+	<footer id="footer">
 
 		<div class="footer1">
 			<div class="container">
@@ -134,7 +145,7 @@
 					<div class="col-md-3 widget">
 						<h3 class="widget-title">Follow me</h3>
 						<div class="widget-body">
-							<p class="follow-me-icons">
+							<p class="follow-me-icons clearfix">
 								<a href=""><i class="fa fa-twitter fa-2"></i></a>
 								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
 								<a href=""><i class="fa fa-github fa-2"></i></a>
@@ -194,28 +205,8 @@
 	<script src="assets/js/headroom.min.js"></script>
 	<script src="assets/js/jQuery.headroom.min.js"></script>
 	<script src="assets/js/template.js"></script>
+
 	
-	<script>
-		function myMap() {
-			var myCenter = new google.maps.LatLng(<%= dest.getLocation().getLongitude()%>,<%= dest.getLocation().getLattitude()%>);
-			  var mapCanvas = document.getElementById("map");
-			  var mapOptions = {
-				  	center: myCenter, zoom: 7,
-				    panControl: true,
-				    zoomControl: true,
-				    mapTypeControl: true,
-				    scaleControl: true,
-				    streetViewControl: true,
-				    overviewMapControl: true,
-				    rotateControl: true
-				}
-			  
-			  var map = new google.maps.Map(mapCanvas, mapOptions);
-			  var marker = new google.maps.Marker({position:myCenter});
-			  marker.setMap(map);
-		}
-	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKyIgPewrgRCgagA1sDItFSRZh5hZlL4&callback=myMap"></script>
-	
+
 </body>
 </html>
