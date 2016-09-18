@@ -98,18 +98,18 @@
 				<header class="page-header">
 					<h1 class="page-title">Visited Destinations</h1>
 				</header>
-					<%! Map<String,String> destinationsAndAuthors = DestinationsManager.getInstance().getAllDestinationsAndAuthors(); %>
-					<%! Collection<String>  destinations = destinationsAndAuthors.values();%>
+					<%! Map<String,Destination> destinationsAndAuthors = DestinationsManager.getInstance().getAllDestinations(); %>
+						<%System.out.println(destinationsAndAuthors.size()); %>
+					<%! Collection<Destination>  destinations = destinationsAndAuthors.values();%>
 					<%!int count = 1; %>					
 					<table>
 						<tr>			
-						<%for(String dest : destinations){ %>
-							<%Destination d = DestinationsManager.getInstance().getDestinationFromCache(dest); %>
+						<%for(Destination dest : destinations){ %>							
 							<%if(count%3==0){ %>
 								</tr>
 								<tr>
 							<%} %>
-							<td><%= d.getName() %><br><img src="DestinationPictureServlet?destination=<%= d.getName()%>"/></td>
+							<td><%= dest.getName() %><br><img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150"/></td>
 						<%} %>
 						</tr>
 					</table>

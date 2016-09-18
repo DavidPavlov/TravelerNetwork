@@ -29,6 +29,9 @@
 
 <body>
 	<!-- Fixed navbar -->
+	<%if (request.getSession() == null){ %>
+		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
+	<%} %>
 	<%if(request.getSession().getAttribute("user")==null){ %>
 		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
 	<%} %>
@@ -67,9 +70,12 @@
 			<aside class="col-md-4 sidebar sidebar-left">
 
 				<div class="row widget">
-					<div class="col-xs-12">											
-						<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
-						<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
+					<div class="col-xs-12">	
+						<%if(request.getSession().getAttribute("user")!=null){ %>
+							<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
+							<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
+						<%} %>									
+						
 					</div>
 				</div>
 				<div class="row widget">
@@ -92,10 +98,11 @@
 					<h1 class="page-title">Visited Destinations</h1>
 				</header>
 					<% ArrayList<Destination> visitedDestinations =  ((User)request.getSession().getAttribute("user")).getVisitedPlaces();%>
-					<%if(visitedDestinations==null){System.out.println("null here");} %>
-					<%System.out.println(visitedDestinations.get(0)); %>
+					
 					<table>			
-						
+						<%for(Destination dest : visitedDestinations){ %>
+						<tr><td><img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150" alt=""/></td></tr>
+						<%} %>
 						
 					</table>
 				</article>

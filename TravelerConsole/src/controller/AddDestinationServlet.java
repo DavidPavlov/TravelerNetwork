@@ -39,8 +39,6 @@ public class AddDestinationServlet extends HttpServlet {
 			location = new Location(Double.parseDouble(longitude), Double.parseDouble(lattitude));
 		} catch (NumberFormatException e) {
 			System.out.println("invalid coordinates type");
-		} catch (InvalidCoordinatesException e) {
-			System.out.println(e.getMessage());
 		}
 		Part destinationImage = request.getPart("picture");
 
