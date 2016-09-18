@@ -1,7 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ page import = "models.*" %>
-<%@ page import = "java.util.ArrayList" %>
+<%@page import="java.util.Collection"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Map"%>
+<%@page import="functionality.DestinationsManager"%>
+<%@page import="models.User"%>
+<%@page import="models.Destination"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -29,9 +34,7 @@
 
 <body>
 	<!-- Fixed navbar -->
-	<%if(request.getSession().getAttribute("user")==null){ %>
-		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
-	<%} %>
+	
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
@@ -41,10 +44,15 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a href="index.jsp">Home</a></li>					
-					<li><a href="AllDestinations.jsp">Destinations</a></li>
-					<li><a class="btn" href="LogoutServlet">Logout</a></li>
-					<li><a class="btn" href="profile.jsp">PROFILE</a></li>
+					<li class="active"><a href="#">Home</a></li>					
+							<li><a href="AllDestinations.jsp">Destinations</a></li>
+							
+					<%if(request.getSession().getAttribute("user") == null){ %>
+						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+					<%}else{ %>
+						<li><a class="btn" href="LogoutServlet">Logout</a></li>
+						<li><a class="btn" href="profile.jsp">PROFILE</a></li>
+					<%} %>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -58,7 +66,7 @@
 		
 		<ol class="breadcrumb">
 			<li><a href="index.html">Home</a></li>
-			<li class="active">Profile Page</li>
+			<li class="active">All Destinations</li>
 		</ol>
 
 		<div class="row">
@@ -68,18 +76,17 @@
 
 				<div class="row widget">
 					<div class="col-xs-12">											
-						<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
-						<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
+						
 					</div>
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">						
-						<p><img src="PictureServlet" height="150" width="150" alt=""></p>
+						
 					</div>
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">						
-						<a class="btn" href="AddDestination.jsp">Add Destination</a>
+						
 					</div>
 				</div>
 
@@ -91,12 +98,20 @@
 				<header class="page-header">
 					<h1 class="page-title">Visited Destinations</h1>
 				</header>
-					<% ArrayList<Destination> visitedDestinations =  ((User)request.getSession().getAttribute("user")).getVisitedPlaces();%>
-					<%if(visitedDestinations==null){System.out.println("null here");} %>
-					<%System.out.println(visitedDestinations.get(0)); %>
-					<table>			
-						
-						
+					<%! Map<String,String> destinationsAndAuthors = DestinationsManager.getInstance().getAllDestinationsAndAuthors(); %>
+					<%! Collection<String>  destinations = destinationsAndAuthors.values();%>
+					<%!int count = 1; %>					
+					<table>
+						<tr>			
+						<%for(String dest : destinations){ %>
+							<%Destination d = DestinationsManager.getInstance().getDestinationFromCache(dest); %>
+							<%if(count%3==0){ %>
+								</tr>
+								<tr>
+							<%} %>
+							<td><%= d.getName() %><br><img src="DestinationPictureServlet?destination=<%= d.getName()%>"/></td>
+						<%} %>
+						</tr>
 					</table>
 				</article>
 			<!-- /Article -->

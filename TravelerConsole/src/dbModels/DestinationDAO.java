@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import exceptions.CannotConnectToDBException;
 import exceptions.InvalidCoordinatesException;
-import functionality.DestinationsManager;
 import functionality.UsersManager;
 import models.Destination;
 import models.Location;
@@ -19,8 +18,10 @@ import models.User;
 public class DestinationDAO {
 
 	private static DestinationDAO instance; // Singleton
+	private ConcurrentHashMap<String, String> destinationsAndAuthors;
 
 	private DestinationDAO() {
+		destinationsAndAuthors = this.getAllDestinationsAndAuthors();
 	}
 
 	public static synchronized DestinationDAO getInstance() {
@@ -31,6 +32,9 @@ public class DestinationDAO {
 	}
 
 	public ConcurrentHashMap<String, String> getAllDestinationsAndAuthors() {
+		if (this.destinationsAndAuthors != null) {
+			return this.destinationsAndAuthors;
+		}
 		ConcurrentHashMap<String, String> destinationsAndAutors = new ConcurrentHashMap<>();
 		Statement statement = null;
 		ResultSet result = null;
@@ -73,18 +77,18 @@ public class DestinationDAO {
 		try {
 			try {
 				statement = DBManager.getInstance().getConnection().createStatement();
-				String selectAllDestinationsFromDB = "SELECT name, description, longitude, latitude, FROM destinations;";
+				String selectAllDestinationsFromDB = "SELECT name, description, longitude, lattitude, picture FROM destinations;";
 				result = statement.executeQuery(selectAllDestinationsFromDB);
 				while (result.next()) {
 					try {
-						String destinationAuthorEmail = DestinationsManager.getInstance()
-								.getDestinationAuthor(result.getString("name"));
+						String destinationAuthorEmail = this.destinationsAndAuthors.get("name");
 						User destinationAuthor = UsersManager.getInstance().getUserFromCache(destinationAuthorEmail);
-						destinations.add(new Destination(result.getString("name"),
-								result.getString("description"),
-								new Location(result.getDouble("latitude"), result.getDouble("longitude")),
-								result.getString("picture"),
-								destinationAuthor));
+						Destination dest = new Destination(result.getString("name"), result.getString("description"),
+								new Location(Double.parseDouble(result.getString("latitude")),
+										Double.parseDouble(result.getString("longitude"))),
+								result.getString("picture"), destinationAuthor);
+						destinations.add(dest);
+						destinationAuthor.addVisitedPlace(dest);
 					} catch (InvalidCoordinatesException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
