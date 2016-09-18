@@ -49,4 +49,8 @@ public class CommentsManager {
 		}
 	}
 
+	public ConcurrentHashMap<String, Comment> getAllComments() {
+		return allComments;
+	}
+
 }

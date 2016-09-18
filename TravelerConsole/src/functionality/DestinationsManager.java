@@ -1,10 +1,12 @@
 package functionality;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import dbModels.DestinationDAO;
 import exceptions.InvalidCoordinatesException;
+import models.Comment;
 import models.Destination;
 import models.Location;
 import models.User;
@@ -16,6 +18,7 @@ public class DestinationsManager {
 	private ConcurrentHashMap<String, String> allDestinationsAndAuthors;
 
 	private DestinationsManager() {
+		ConcurrentHashMap<String, Comment> allComments = CommentsManager.getInstance().getAllComments();
 		allDestinationsAndAuthors = DestinationDAO.getInstance().getAllDestinationsAndAuthors(); // adds
 																									// destinations
 																									// and
@@ -32,8 +35,22 @@ public class DestinationsManager {
 											// to
 											// collection
 			allDestinations.put(d.getName(), d);
-
+			for (Map.Entry<String, Comment> e : allComments.entrySet()) {
+				if (e.getValue().getPlaceName().equals(d.getName())) { // if the
+																		// comment'
+																		// place
+																		// name
+																		// is
+																		// the
+																		// same
+																		// as
+																		// dest.
+																		// name
+					d.addComment(e.getValue()); // add comment to dest.
+				}
+			}
 		}
+
 	}
 
 	public static synchronized DestinationsManager getInstance() {
