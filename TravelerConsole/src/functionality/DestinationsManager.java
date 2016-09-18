@@ -32,6 +32,7 @@ public class DestinationsManager {
 											// to
 											// collection
 			allDestinations.put(d.getName(), d);
+
 		}
 	}
 

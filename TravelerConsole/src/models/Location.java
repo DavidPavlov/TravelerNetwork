@@ -1,12 +1,10 @@
 package models;
 
-import exceptions.InvalidCoordinatesException;
-
 public class Location implements Cloneable {
 	private double lattitude;
 	private double longitude;
 
-	public Location(double lattitude, double longitude) throws InvalidCoordinatesException {
+	public Location(double lattitude, double longitude) {
 		this.setLattitude(lattitude);
 		this.setLongitude(longitude);
 	}
@@ -15,9 +13,9 @@ public class Location implements Cloneable {
 		return lattitude;
 	}
 
-	private void setLattitude(double lattitude) throws InvalidCoordinatesException {
+	private void setLattitude(double lattitude) {
 		if (lattitude < 0 || lattitude > 90) {
-			throw new InvalidCoordinatesException();
+
 		}
 		this.lattitude = lattitude;
 	}
@@ -26,9 +24,9 @@ public class Location implements Cloneable {
 		return longitude;
 	}
 
-	private void setLongitude(double longitude) throws InvalidCoordinatesException {
+	private void setLongitude(double longitude) {
 		if (longitude < 0 || longitude > 180) {
-			throw new InvalidCoordinatesException();
+
 		}
 		this.longitude = longitude;
 	}

@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import exceptions.CannotConnectToDBException;
-import exceptions.InvalidCoordinatesException;
 import models.Destination;
 import models.Location;
 import models.User;
@@ -76,21 +75,16 @@ public class DestinationDAO {
 		try {
 			try {
 				statement = DBManager.getInstance().getConnection().createStatement();
-
 				String selectAllDestinationsFromDB = "SELECT name, description, longitude, lattitude, picture FROM destinations;";
 				result = statement.executeQuery(selectAllDestinationsFromDB);
 				while (result.next()) {
-					try {
-						String destinationAuthorEmail = this.destinationsAndAuthors.get("name");
-						Destination dest = new Destination(result.getString("name"), result.getString("description"),
-								new Location(Double.parseDouble(result.getString("latitude")),
-										Double.parseDouble(result.getString("longitude"))),
-								result.getString("picture"), destinationAuthorEmail);
-						destinations.add(dest);
-					} catch (InvalidCoordinatesException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					String destinationAuthorEmail = this.destinationsAndAuthors.get(result.getString("name"));
+					System.out.println("DesDAO: des author: " + destinationAuthorEmail);
+					Destination dest = new Destination(result.getString("name"), result.getString("description"),
+							new Location(Double.parseDouble(result.getString("lattitude")),
+									Double.parseDouble(result.getString("longitude"))),
+							result.getString("picture"), destinationAuthorEmail);
+					destinations.add(dest);
 				}
 			} catch (CannotConnectToDBException e) {
 				// TODO handle exception - write to log and userFriendly screen
