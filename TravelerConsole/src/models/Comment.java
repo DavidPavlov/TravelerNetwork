@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidDataException;
-import functionality.UsersManager;
 
 public class Comment {
 
@@ -14,9 +13,9 @@ public class Comment {
 	private int numberOfLikes;
 	private ArrayList<User> userLikers; // List of users who like the comment
 
-	public Comment(String authorEmail, String placeName, String text, int numberOfLikes)
+	public Comment(User author, String placeName, String text, int numberOfLikes)
 			throws InvalidDataException, InvalidAuthorException {
-		setAuthor(UsersManager.getInstance().getUserFromCache(authorEmail));
+		setAuthor(author);
 		this.placeName = placeName;
 		this.setText(text);
 		this.numberOfLikes = numberOfLikes;

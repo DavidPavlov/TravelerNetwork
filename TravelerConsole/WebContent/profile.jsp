@@ -81,7 +81,7 @@
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">						
-						<p><img src="PictureServlet" height="150" width="150" alt=""></p>
+						<p><img src="PictureServlet?user=<%= ((User)request.getSession().getAttribute("user")).getEmail() %>" height="150" width="150" alt=""></p>
 					</div>
 				</div>
 				<div class="row widget">

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import functionality.CommentsManager;
 import functionality.UsersManager;
 import models.User;
 
@@ -27,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("userEmail");
 		String password = request.getParameter("userPassword");
 		User user = UsersManager.getInstance().logIn(email, password);
+		CommentsManager.getInstance();
 		if (user != null) { // the validation is successful
 			request.getSession().setAttribute("user", user); // The user is
 																// passed to the

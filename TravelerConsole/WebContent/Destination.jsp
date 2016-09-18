@@ -90,7 +90,7 @@
 				</div>
 				<div class="row widget">
 					<div class="col-xs-12">						
-						<a class="btn" href="Comment.jsp">Add Comment</a>
+						<a class="btn" href="Comment.jsp?name=<%=dest.getName()%>">Add Comment</a>
 					</div>
 				</div>
 				
@@ -104,6 +104,34 @@
 					<h1 class="page-title">Description</h1>
 				</header>
 					<h4><%out.print(dest.getDescription()); %></h4>
+					
+			</article>
+				<%if(dest.getComments().size()>0){ %>
+				<article class="col-md-8 maincontent">
+					<header class="page-header">
+						<h1 class="page-title">Comments</h1>
+					</header>
+						<table>
+							<tr>	
+								<%for(Comment comment : dest.getComments()){ %>				
+										<td>
+											<h6><%= comment.getAuthor().getFirstName()+ " " + comment.getAuthor().getLastName()%></h6>
+											<img src="PictureServlet?user=<%= comment.getAuthor().getEmail()%>" height="60" width="60"/>
+										</td>
+										<td>
+											<p><%=comment.getText() %></p>
+										</td>
+									</tr>
+									<tr>
+								<%} %>
+							</tr>
+						</table>
+					
+				</article>
+				<%} %>
+				
+				<article class="col-md-8 maincontent">
+					<br>
 					
 				</article>
 			<!-- /Article -->

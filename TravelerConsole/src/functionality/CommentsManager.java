@@ -34,7 +34,7 @@ public class CommentsManager {
 
 	public void saveComment(User user, String placeName, String text, int numberOfLikes) {
 		try {
-			Comment comment = new Comment(user.getEmail(), placeName, text, numberOfLikes);
+			Comment comment = new Comment(user, placeName, text, numberOfLikes);
 			allComments.put(comment.getPlaceName(), comment); // adds the new
 																// comment to
 																// the

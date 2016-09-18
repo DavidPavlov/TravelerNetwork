@@ -10,7 +10,10 @@ import java.util.Set;
 import exceptions.CannotConnectToDBException;
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidDataException;
+import functionality.DestinationsManager;
+import functionality.UsersManager;
 import models.Comment;
+import models.User;
 
 public class CommentDao {
 
@@ -38,10 +41,13 @@ public class CommentDao {
 				result = statement.executeQuery(selectAllCommentsFromDB);
 				while (result.next()) {
 					try {
-						comments.add(new Comment(result.getString("author_email"),
-								result.getString("place_name"),
-								result.getString("text"),
-								result.getInt("number_of_likes")));
+
+						User author = UsersManager.getInstance().getUserFromCache(result.getString("author_email"));
+						Comment comment = new Comment(author, result.getString("place_name"), result.getString("text"),
+								result.getInt("number_of_likes"));
+						comments.add(comment);
+						DestinationsManager.getInstance().getDestinationFromCache(result.getString("place_name"))
+								.addComment(comment);
 					} catch (InvalidDataException | InvalidAuthorException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

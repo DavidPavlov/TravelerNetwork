@@ -102,7 +102,7 @@ public class UsersManager {
 			return false;
 		}
 		try {
-			Comment comment = new Comment(user.getEmail(), destinationName, text, 0);
+			Comment comment = new Comment(user, destinationName, text, 0);
 			CommentsManager.getInstance().saveComment(user, destinationName, text, 0);
 			DestinationsManager.getInstance().getDestinationFromCache(destinationName).addComment(comment); // adds
 																											// the

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import functionality.UsersManager;
 import models.User;
 
 /**
@@ -32,7 +33,7 @@ public class PictureServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		User user = (User) request.getSession().getAttribute("user");
+		User user = (User) UsersManager.getInstance().getUserFromCache(request.getParameter("user"));
 		if (user == null) {
 			response.sendRedirect("index.jsp");
 		} else {
