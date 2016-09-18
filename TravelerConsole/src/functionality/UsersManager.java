@@ -106,6 +106,7 @@ public class UsersManager {
 		String destPicture = destination.getPicture();
 		if (DestinationsManager.getInstance().addDestination(user, destName, destDescription, destLattitude,
 				destLongitude, destPicture)) {
+			addVisitedDestination(user, destination);
 			return true;
 		} else {
 			return false;
