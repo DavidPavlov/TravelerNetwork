@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import exceptions.CannotConnectToDBException;
 import exceptions.InvalidCoordinatesException;
-import functionality.UsersManager;
 import models.Destination;
 import models.Location;
 import models.User;
@@ -77,24 +76,22 @@ public class DestinationDAO {
 		try {
 			try {
 				statement = DBManager.getInstance().getConnection().createStatement();
+
 				String selectAllDestinationsFromDB = "SELECT name, description, longitude, lattitude, picture FROM destinations;";
 				result = statement.executeQuery(selectAllDestinationsFromDB);
 				while (result.next()) {
 					try {
 						String destinationAuthorEmail = this.destinationsAndAuthors.get("name");
-						User destinationAuthor = UsersManager.getInstance().getUserFromCache(destinationAuthorEmail);
 						Destination dest = new Destination(result.getString("name"), result.getString("description"),
 								new Location(Double.parseDouble(result.getString("latitude")),
 										Double.parseDouble(result.getString("longitude"))),
-								result.getString("picture"), destinationAuthor);
+								result.getString("picture"), destinationAuthorEmail);
 						destinations.add(dest);
-						destinationAuthor.addVisitedPlace(dest);
 					} catch (InvalidCoordinatesException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				// TODO add destinations to each user (form DB)
 			} catch (CannotConnectToDBException e) {
 				// TODO handle exception - write to log and userFriendly screen
 				e.getMessage();

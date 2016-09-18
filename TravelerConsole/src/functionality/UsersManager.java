@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import dbModels.UserDao;
@@ -27,11 +29,29 @@ public class UsersManager {
 
 	private UsersManager() {
 		registerredUsers = new ConcurrentHashMap<>();
-		for (User u : UserDao.getInstance().getAllUsers()) { // adds all users
-																// from DB to
-																// collection
-			registerredUsers.put(u.getEmail(), u);
+		Set<User> tempAllUsers = UserDao.getInstance().getAllUsers();
+		ConcurrentHashMap<String, Destination> allDestinations = DestinationsManager.getInstance().getAllDestinations();
+		for (User u : tempAllUsers) { // adds all users
+										// from DB to
+										// collection
+			registerredUsers.put(u.getEmail(), u); // add user to cache
+			for (Map.Entry<String, Destination> e : allDestinations.entrySet()) { // destinations
+																					// cache
+				if (e.getValue().getAuthorEmail().equals(u.getEmail())) { // if
+																			// the
+																			// user
+																			// is
+																			// the
+																			// author
+																			// of
+																			// the
+																			// destination
+					u.addVisitedPlace(e.getValue()); // adds the destination to
+														// user
+				}
+			}
 		}
+
 	}
 
 	public static synchronized UsersManager getInstance() {

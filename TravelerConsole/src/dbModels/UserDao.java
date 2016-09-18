@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import exceptions.CannotConnectToDBException;
 import models.User;
@@ -27,9 +26,10 @@ public class UserDao {
 
 	public Set<User> getAllUsers() {
 		System.out.println("Getting all users from DB!!!!");
-		ConcurrentHashMap<String, String> allDestinationsAndAuthors = DestinationDAO.getInstance()
-				.getAllDestinationsAndAuthors(); // cache with dest. names and
-													// author emails
+		// ConcurrentHashMap<String, String> allDestinationsAndAuthors =
+		// DestinationDAO.getInstance()
+		// .getAllDestinationsAndAuthors(); // cache with dest. names and
+		// // author emails
 		Set<User> users = new HashSet<User>();
 		Statement statement = null;
 		ResultSet result = null;

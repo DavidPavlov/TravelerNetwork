@@ -1,5 +1,6 @@
 package functionality;
 
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import dbModels.DestinationDAO;
@@ -22,13 +23,14 @@ public class DestinationsManager {
 																									// to
 																									// collection
 		allDestinations = new ConcurrentHashMap<>();
-		for (Destination d : DestinationDAO.getInstance().getAllDestinations()) { // adds
-																					// all
-																					// destinations
-																					// form
-																					// DB
-																					// to
-																					// collection
+		Set<Destination> tempAllDest = DestinationDAO.getInstance().getAllDestinations();
+		for (Destination d : tempAllDest) { // adds
+											// all
+											// destinations
+											// form
+											// DB
+											// to
+											// collection
 			allDestinations.put(d.getName(), d);
 		}
 	}
@@ -57,7 +59,7 @@ public class DestinationsManager {
 			// the
 			// collection
 			Destination destination = new Destination(name, description, new Location(lattitude, longitude), picture,
-					user);
+					user.getEmail());
 			allDestinations.put(name, destination); // adds the new destination
 													// to the collection
 			DestinationDAO.getInstance().saveDestinationToDB(user, destination); // saves
@@ -100,6 +102,10 @@ public class DestinationsManager {
 
 	public ConcurrentHashMap<String, String> getAllDestinationsAndAuthors() {
 		return allDestinationsAndAuthors;
+	}
+
+	public ConcurrentHashMap<String, Destination> getAllDestinations() {
+		return allDestinations;
 	}
 
 }

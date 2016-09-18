@@ -2,6 +2,8 @@ package models;
 
 import java.util.ArrayList;
 
+import functionality.UsersManager;
+
 public class Destination {
 	private String name;
 	private String description;
@@ -9,15 +11,15 @@ public class Destination {
 	private ArrayList<PlaceToSleep> placesToSleep;
 	private ArrayList<PlaceToEat> placesToEat;
 	private Location location;
-	private User author;
 	private String picture;
+	private String authorEmail;
 
-	public Destination(String name, String description, Location location, String picture, User author) {
+	public Destination(String name, String description, Location location, String picture, String authorEmail) {
 		this.name = name;
 		this.description = description;
 		this.location = location;
 		this.picture = picture;
-		this.author = author;
+		this.authorEmail = authorEmail;
 		this.comments = new ArrayList<>();
 		this.placesToSleep = new ArrayList<>();
 		this.placesToEat = new ArrayList<>();
@@ -71,8 +73,12 @@ public class Destination {
 		this.picture = picture;
 	}
 
+	public String getAuthorEmail() {
+		return authorEmail;
+	}
+
 	public User getAuthor() {
-		return author;
+		return UsersManager.getInstance().getUserFromCache(this.authorEmail);
 	}
 
 }
