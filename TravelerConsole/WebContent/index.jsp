@@ -67,7 +67,7 @@
 	<!-- Intro -->
 	<div class="container text-center">
 		<br> <br>
-		<h2 class="thin">The best place to tell people where you've been on your last travel and how awesome your experience was!</h2>
+		<h2 class="thin">The best place to tell people where you've been on your last travels and how awesome your experience was!</h2>
 		<p class="text-muted">
 			The difference between involvement and commitment is like an eggs-and-ham breakfast:<br> 
 			the chicken was involved; the pig was committed. Be truly committed to what you do!
@@ -85,25 +85,25 @@
 				<div class="col-md-3 col-sm-6 highlight">
 					<div class="h-caption"><h4><i class="fa fa-cogs fa-5"></i>User-powered content</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aliquid adipisci aspernatur. Soluta quisquam dignissimos earum quasi voluptate. Amet, dignissimos, tenetur vitae dolor quam iusto assumenda hic reprehenderit?</p>
+						<p>All the content in the site is inspired, generated and intended for our users! Our goal is to help you make the perfect Traveler social network and connect with other travelers like you. </p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
 					<div class="h-caption"><h4><i class="fa fa-flash fa-5"></i>Burning calories while having fun</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, commodi, sequi quis ad fugit omnis cumque a libero error nesciunt molestiae repellat quos perferendis numquam quibusdam rerum repellendus laboriosam reprehenderit! </p>
+						<p>Get in your best shape by traveling all over Bulgaria, finding new places, and sharing your experience with your friends! Being fit has never been easier and more enjoyable!</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
 					<div class="h-caption"><h4><i class="fa fa-heart fa-5"></i>Beautiful destinations</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
+						<p>Reach out and explore an amazing new world you have never seen before! Explore the most breathtaking destinations and live to tell the story!</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
 					<div class="h-caption"><h4><i class="fa fa-smile-o fa-5"></i>Finding new places and friends</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, excepturi, maiores, dolorem quasi reprehenderit illo accusamus nulla minima repudiandae quas ducimus reiciendis odio sequi atque temporibus facere corporis eos expedita? </p>
+						<p>Bond with people with the same travel interests as yours and keep all your memories of going on new adventures!</p>
 					</div>
 				</div>
 			</div> <!-- /row  -->
@@ -120,34 +120,28 @@
 
 		<div class="row">
 			<div class="col-sm-6">
-				<h3>Which code editor would you recommend?</h3>
-				<p>I'd highly recommend you <a href="http://www.sublimetext.com/">Sublime Text</a> - a free to try text editor which I'm using daily. Awesome tool!</p>
+				<h3>What does it cost to sign up?</h3>
+				<p>- The registration and all the features in the site are FREE! But registering will cost you about 1 minute and a lifetime of adventures!</p>
 			</div>
 			<div class="col-sm-6">
-				<h3>Nice header. Where do I find more images like that one?</h3>
-				<p>
-					Well, there are thousands of stock art galleries, but personally, 
-					I prefer to use photos from these sites: <a href="http://unsplash.com">Unsplash.com</a> 
-					and <a href="http://www.flickr.com/creativecommons/by-2.0/tags/">Flickr - Creative Commons</a></p>
+				<h3>What can I do when I register?</h3>
+				<p>- You can add new destinations, view already created ones and add them to you list of destinations. You can also add friends, message them, comment on your friends' posts and like them. Just don't forget to have fun!</p>
 			</div>
 		</div> <!-- /row -->
 
 		<div class="row">
 			<div class="col-sm-6">
-				<h3>Can I use it to build a site for my client?</h3>
-				<p>
-					Yes, you can. You may use this template for any purpose, just don't forget about the <a href="http://creativecommons.org/licenses/by/3.0/">license</a>, 
-					which says: "You must give appropriate credit", i.e. you must provide the name of the creator and a link to the original template in your work. 
-				</p>
+				<h3>Can I invite a friend to join from another social network?</h3>
+				<p>- The feature for logging in from other social medias or inviting a friend there is currently in development. But while you wait, you can like our Facebook page and tell your friends about us! Let's  add more people to our community!</p>
 			</div>
 			<div class="col-sm-6">
-				<h3>Can you customize this template for me?</h3>
-				<p>Yes, I can. Please drop me a line to sergey-at-pozhilov.com and describe your needs in details. Please note, my services are not cheap.</p>
+				<h3>Can you tell me more about the Site?</h3>
+				<p>- You can click on the About icon on the bottom of the page to learn more about the project and all the information you need! Or you can write to us by clicking on the Contact icon! We'll be more than happy to answer you questions!</p>
 			</div>
 		</div> <!-- /row -->
 
 		<div class="jumbotron top-space">
-			<h4>Dicta, nostrum nemo soluta sapiente sit dolor quae voluptas quidem doloribus recusandae facere magni ullam suscipit sunt atque rerum eaque iusto facilis esse nam veniam incidunt officia perspiciatis at voluptatibus. Libero, aliquid illum possimus numquam fuga.</h4>
+			<h4>The Traveler Bulgaria supports the Keep Inspiring Initiative. To learn more about it click on the button!</h4>
      		<p class="text-right"><a class="btn btn-primary btn-large">Learn more »</a></p>
   		</div>
 
@@ -180,31 +174,31 @@
 					<div class="col-md-3 widget">
 						<h3 class="widget-title">Contact</h3>
 						<div class="widget-body">
-							<p>+234 23 9873237<br>
-								<a href="mailto:#">some.email@somewhere.com</a><br>
+							<p><br>
+								<a href="mailto:#">thetravellerbulgaria@gmail.com</a><br>
 								<br>
-								234 Hidden Pond Road, Ashland City, TN 37015
+								Infinity Tower, Sofia City, Bulgaria
 							</p>	
 						</div>
 					</div>
 
 					<div class="col-md-3 widget">
-						<h3 class="widget-title">Follow me</h3>
+						<h3 class="widget-title">Follow us</h3>
 						<div class="widget-body">
 							<p class="follow-me-icons">
 								<a href=""><i class="fa fa-twitter fa-2"></i></a>
 								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
 								<a href=""><i class="fa fa-github fa-2"></i></a>
-								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+								<a href="https://www.facebook.com/TheTravellerBulgaria/"><i class="fa fa-facebook fa-2"></i></a>
 							</p>	
 						</div>
 					</div>
 
 					<div class="col-md-6 widget">
-						<h3 class="widget-title">Text widget</h3>
+						<h3 class="widget-title">Our motto</h3>
 						<div class="widget-body">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-							<p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+							<p>“The whole object of travel is not to set foot on foreign land; it is to set foot on one’s own country as a foreign land.” – G.K. Chesterton</p>
+							<p>So keep moving! But don't forget to take time to stop and smell the roses!</p>
 						</div>
 					</div>
 
