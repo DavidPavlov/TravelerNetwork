@@ -197,7 +197,7 @@
 					<div class="col-md-6 widget">
 						<h3 class="widget-title">Our motto</h3>
 						<div class="widget-body">
-							<p>“The whole object of travel is not to set foot on foreign land; it is to set foot on one’s own country as a foreign land.” – G.K. Chesterton</p>
+							<p>"The whole object of travel is not to set foot on foreign land; it is to set foot on one's own country as on a foreign land." - G.K. Chesterton</p>
 							<p>So keep moving! But don't forget to take time to stop and smell the roses!</p>
 						</div>
 					</div>
@@ -225,7 +225,7 @@
 					<div class="col-md-6 widget">
 						<div class="widget-body">
 							<p class="text-right">
-								Copyright &copy; 2014, Your name. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a> 
+								Copyright &copy; 2016, The Traveler Bulgaria. Designed by David & Yasen</a> 
 							</p>
 						</div>
 					</div>

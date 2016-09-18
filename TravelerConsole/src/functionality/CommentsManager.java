@@ -42,6 +42,7 @@ public class CommentsManager {
 			CommentDao.getInstance().saveCommentToDB(comment); // saves comment
 																// to
 																// DB
+			DestinationsManager.getInstance().getDestinationFromCache(placeName).addComment(comment);
 		} catch (InvalidDataException | InvalidAuthorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
