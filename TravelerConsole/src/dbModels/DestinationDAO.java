@@ -79,7 +79,6 @@ public class DestinationDAO {
 				result = statement.executeQuery(selectAllDestinationsFromDB);
 				while (result.next()) {
 					String destinationAuthorEmail = this.destinationsAndAuthors.get(result.getString("name"));
-					System.out.println("DesDAO: des author: " + destinationAuthorEmail);
 					Destination dest = new Destination(result.getString("name"), result.getString("description"),
 							new Location(Double.parseDouble(result.getString("lattitude")),
 									Double.parseDouble(result.getString("longitude"))),

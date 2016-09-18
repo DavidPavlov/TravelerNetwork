@@ -11,6 +11,7 @@
 	<meta name="author"      content="David & Yasen">
 	<title>The Traveler Bulgaria</title>
 	
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">

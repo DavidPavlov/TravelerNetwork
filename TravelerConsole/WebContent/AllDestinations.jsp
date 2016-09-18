@@ -14,8 +14,9 @@
 	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author"      content="David & Yasen">
-	<title>The Traveler Bulgaria</title>
 	
+	<title>The Traveler Bulgaria</title>
+	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -44,8 +45,8 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>					
-							<li><a href="AllDestinations.jsp">Destinations</a></li>
+					<li><a href="index.jsp">Home</a></li>					
+					<li><a href="AllDestinations.jsp">Destinations</a></li>
 							
 					<%if(request.getSession().getAttribute("user") == null){ %>
 						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
@@ -65,7 +66,7 @@
 	<div class="container">
 		
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
+			<li><a href="index.jsp">Home</a></li>
 			<li class="active">All Destinations</li>
 		</ol>
 
@@ -96,7 +97,7 @@
 			<!-- Article main content -->
 			<article class="col-md-8 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Visited Destinations</h1>
+					<h1 class="page-title">All Destinations</h1>
 				</header>
 					<%! Map<String,Destination> destinationsAndAuthors = DestinationsManager.getInstance().getAllDestinations(); %>
 						<%System.out.println(destinationsAndAuthors.size()); %>
