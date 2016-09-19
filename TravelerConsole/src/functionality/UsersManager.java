@@ -30,7 +30,7 @@ public class UsersManager {
 	private UsersManager() {
 		registerredUsers = new ConcurrentHashMap<>();
 		Set<User> tempAllUsers = UserDao.getInstance().getAllUsers();
-		ConcurrentHashMap<String, Destination> allDestinations = DestinationsManager.getInstance().getAllDestinations();
+		Map<String, Destination> allDestinations = DestinationsManager.getInstance().getAllDestinations();
 		for (User u : tempAllUsers) { // adds all users
 										// from DB to
 										// collection

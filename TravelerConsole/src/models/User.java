@@ -24,59 +24,89 @@ public class User implements Cloneable {
 	}
 
 	public String getProfilePic() {
-		return profilePic;
+		synchronized (this) {
+			return profilePic;
+		}
 	}
 
 	public void setProfilePic(String profilePic) {
-		this.profilePic = profilePic;
+		synchronized (this) {
+			this.profilePic = profilePic;
+		}
 	}
 
 	public String getFirstName() {
-		return firstName;
+		synchronized (this) {
+			return firstName;
+		}
 	}
 
 	public String getLastName() {
-		return lastName;
+		synchronized (this) {
+			return lastName;
+		}
 	}
 
 	public String getPassword() {
-		return password;
+		synchronized (this) {
+			return password;
+		}
 	}
 
 	public String getEmail() {
-		return email;
+		synchronized (this) {
+			return email;
+		}
 	}
 
 	public String getDescription() {
-		return description;
+		synchronized (this) {
+			return description;
+		}
 	}
 
 	public ArrayList<Destination> getVisitedPlaces() {
-		return (ArrayList<Destination>) this.visitedPlaces;
+		synchronized (this) {
+			ArrayList<Destination> copy = new ArrayList<>();
+			copy.addAll(visitedPlaces);
+			return visitedPlaces;
+		}
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		synchronized (this) {
+			this.firstName = firstName;
+		}
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		synchronized (this) {
+			this.lastName = lastName;
+		}
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		synchronized (this) {
+			this.password = password;
+		}
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		synchronized (this) {
+			this.email = email;
+		}
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public synchronized void setDescription(String description) {
+		synchronized (this) {
+			this.description = description;
+		}
 	}
 
-	public void addVisitedPlace(Destination destination) {
-		this.visitedPlaces.add(destination);
+	public synchronized void addVisitedPlace(Destination destination) {
+		synchronized (this) {
+			this.visitedPlaces.add(destination);
+		}
 	}
 
 }

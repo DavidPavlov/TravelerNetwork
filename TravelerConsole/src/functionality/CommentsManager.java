@@ -50,7 +50,9 @@ public class CommentsManager {
 	}
 
 	public ConcurrentHashMap<String, Comment> getAllComments() {
-		return allComments;
+		ConcurrentHashMap<String, Comment> copy = new ConcurrentHashMap<>();
+		copy.putAll(allComments);
+		return copy;
 	}
 
 }

@@ -26,11 +26,15 @@ public class Destination {
 	}
 
 	public void addPlaceToSleep(PlaceToSleep place) {
-		this.placesToSleep.add(place);
+		synchronized (this) {
+			this.placesToSleep.add(place);
+		}
 	}
 
 	public void addComment(Comment comment) {
-		this.comments.add(comment);
+		synchronized (this) {
+			this.comments.add(comment);
+		}
 	}
 
 	public void addPlaceToEat(PlaceToEat place) {
@@ -38,47 +42,71 @@ public class Destination {
 	}
 
 	public String getName() {
-		return name;
+		synchronized (this) {
+			return name;
+		}
 	}
 
 	public String getDescription() {
-		return description;
+		synchronized (this) {
+			return description;
+		}
 	}
 
 	public Location getLocation() {
-		return location;
+		synchronized (this) {
+			return location;
+		}
 	}
 
 	public String getPicture() {
-		return picture;
+		synchronized (this) {
+			return picture;
+		}
 	}
 
 	public ArrayList<Comment> getComments() {
+		// synchronized (this) {
+		// ArrayList<Comment> copy = new ArrayList<>();
+		// // copy.addAll(comments);
 		return comments;
+		// }
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		synchronized (this) {
+			this.name = name;
+		}
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		synchronized (this) {
+			this.description = description;
+		}
 	}
 
 	public void setLocation(Location location) {
-		this.location = location;
+		synchronized (this) {
+			this.location = location;
+		}
 	}
 
 	public void setPicture(String picture) {
-		this.picture = picture;
+		synchronized (this) {
+			this.picture = picture;
+		}
 	}
 
 	public String getAuthorEmail() {
-		return authorEmail;
+		synchronized (this) {
+			return authorEmail;
+		}
 	}
 
 	public User getAuthor() {
-		return UsersManager.getInstance().getUserFromCache(this.authorEmail);
+		synchronized (this) {
+			return UsersManager.getInstance().getUserFromCache(this.authorEmail);
+		}
 	}
 
 }

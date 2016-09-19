@@ -65,6 +65,7 @@ public class DestinationsManager {
 					user.getEmail());
 			allDestinations.put(name, destination); // adds the new destination
 													// to the collection
+			user.addVisitedPlace(destination);
 			DestinationDAO.getInstance().saveDestinationToDB(user, destination); // saves
 																					// destination
 																					// to
@@ -104,11 +105,15 @@ public class DestinationsManager {
 	}
 
 	public ConcurrentHashMap<String, String> getAllDestinationsAndAuthors() {
-		return allDestinationsAndAuthors;
+		ConcurrentHashMap<String, String> copy = new ConcurrentHashMap<>();
+		copy.putAll(allDestinationsAndAuthors);
+		return copy;
 	}
 
 	public ConcurrentHashMap<String, Destination> getAllDestinations() {
-		return allDestinations;
+		ConcurrentHashMap<String, Destination> copy = new ConcurrentHashMap<>();
+		copy.putAll(allDestinations);
+		return copy;
 	}
 
 }
