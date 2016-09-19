@@ -238,7 +238,7 @@
 	<script>
 		function myMap() {
 			<%if (request.getParameter("name") != null){ %>
-			var myCenter = new google.maps.LatLng(<%= dest.getLocation().getLongitude()%>,<%= dest.getLocation().getLattitude()%>);
+			var myCenter = new google.maps.LatLng(<%= dest.getLocation().getLattitude()%>,<%= dest.getLocation().getLongitude()%>);
 			  var mapCanvas = document.getElementById("map");
 			  var mapOptions = {
 				  	center: myCenter, zoom: 7,
