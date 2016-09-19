@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page errorPage="Error.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -33,6 +34,7 @@
    		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
    		response.addHeader("Pragma", "no-cache"); 
    		response.addDateHeader ("Expires", 0);
+   		
   	%>
 	<%@ include file="CheckIfLoggedIn.jsp" %>
 	
@@ -162,6 +164,7 @@
 	
 
 </body>
+
 </html>
 
 <cfoutput>
@@ -203,10 +206,10 @@
 
 function initialize() {
 
-    // the location of the initial pin
+    
     var myLatlng = new google.maps.LatLng(42.70,23.33);
 
-    // create the map
+    
     var myOptions = {
         zoom: 8,
         center: myLatlng,
@@ -217,7 +220,7 @@ function initialize() {
 
     map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-    // establish the initial marker/pin
+    
     var image = '/images/googlepins/pin2.png';  
     marker = new google.maps.Marker({
       position: myLatlng,
@@ -226,42 +229,33 @@ function initialize() {
       title:"Property Location"
     });
 
-    // establish the initial div form fields
+    
     formlat = document.getElementById("latbox").value = myLatlng.lat();
     formlng = document.getElementById("lngbox").value = myLatlng.lng();
 
-    // close popup window
+    
     google.maps.event.addListener(map, 'click', function() {
         infowindow.close();
         });
 
-    // removing old markers/pins
+   
     google.maps.event.addListener(map, 'click', function(event) {
-        //call function to create marker
+        
          if (marker) {
             marker.setMap(null);
             marker = null;
-         }
-
-        // Information for popup window if you so chose to have one
-        /*
-         marker = createMarker(event.latLng, "name", "<b>Location</b><br>"+event.latLng);
-        */
+         }        
 
         var image = '/images/googlepins/pin2.png';
         var myLatLng = event.latLng ;
-        /*  
-        var marker = new google.maps.Marker({
-            by removing the 'var' subsquent pin placement removes the old pin icon
-        */
+       
         marker = new google.maps.Marker({   
             position: myLatLng,
             map: map,       
            
         });
             marker.setMap(map);
-
-        // populate the form fields with lat & lng 
+        
         formlat = document.getElementById("latbox").value = event.latLng.lat();
         formlng = document.getElementById("lngbox").value = event.latLng.lng();
 

@@ -29,6 +29,11 @@ public class AddDestinationServlet extends HttpServlet {
 		ServletUtils.checkIfLoggedIn(request, response);
 
 		String name = request.getParameter("name");
+		if (DestinationsManager.getInstance().getDestinationFromCache(name) != null) {
+			System.out.println("Destination already exists");
+			response.sendRedirect("AddDestination.jsp");
+			return;
+		}
 		String longitude = request.getParameter("long");
 		String lattitude = request.getParameter("lat");
 		String description = request.getParameter("description");

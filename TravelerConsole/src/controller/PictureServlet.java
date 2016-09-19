@@ -21,7 +21,7 @@ import models.User;
 public class PictureServlet extends HttpServlet {
 
 	public static void returnProfilePic(User u, HttpServletResponse response) throws IOException {
-		System.out.println("getting picture");
+
 		File profilePicFile = new File("userPics", u.getProfilePic());
 		response.setContentLength((int) profilePicFile.length());
 		String contentType = "image/"

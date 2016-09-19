@@ -23,7 +23,6 @@ public class DestinationPictureServlet extends HttpServlet {
 
 	public static void returnDestinationPic(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		System.out.println("getting destination picture");
 
 		if (request.getParameter("destination") == null) {
 			return;

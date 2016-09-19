@@ -66,11 +66,11 @@ public class Destination {
 	}
 
 	public ArrayList<Comment> getComments() {
-		// synchronized (this) {
-		// ArrayList<Comment> copy = new ArrayList<>();
-		// // copy.addAll(comments);
-		return comments;
-		// }
+		synchronized (this) {
+			ArrayList<Comment> copy = new ArrayList<>();
+			copy.addAll(comments);
+			return comments;
+		}
 	}
 
 	public void setName(String name) {

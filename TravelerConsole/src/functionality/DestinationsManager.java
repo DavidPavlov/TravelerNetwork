@@ -64,7 +64,8 @@ public class DestinationsManager {
 			Destination destination = new Destination(name, description, new Location(lattitude, longitude), picture,
 					user.getEmail());
 			allDestinations.put(name, destination); // adds the new destination
-													// to the collection
+			allDestinationsAndAuthors.put(name, user.getEmail()); // to the
+																	// collection
 			user.addVisitedPlace(destination);
 			DestinationDAO.getInstance().saveDestinationToDB(user, destination); // saves
 																					// destination
