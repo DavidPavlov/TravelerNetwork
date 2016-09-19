@@ -63,7 +63,10 @@
 		<div class="container">
 			<div class="row">
 				<h1 class="lead">The Traveler Bulgaria</h1>
-				<p><a class="btn btn-default btn-lg" role="button">View Top Destinations</a> <a class="btn btn-action btn-lg" role="button">View All Destinations</a></p>
+				
+				<p><a class="btn btn-default btn-lg" href="SectionUnderConstructionPage.html">View Top Destinations</a> 
+				<a class="btn btn-action btn-lg" href="AllDestinations.jsp" >View All Destinations</a></p>
+
 			</div>
 		</div>
 	</header>
@@ -147,7 +150,7 @@
 
 		<div class="jumbotron top-space">
 			<h4>The Traveler Bulgaria supports the Keep Inspiring Initiative. To learn more about it click on the button!</h4>
-     		<p class="text-right"><a class="btn btn-primary btn-large">Learn more »</a></p>
+     		<p class="text-right"><a class="btn btn-primary btn-large" href="SectionUnderConstructionPage.html">Learn more »</a></p>
   		</div>
 
 </div>	<!-- /container -->
@@ -219,9 +222,9 @@
 						<div class="widget-body">
 							<p class="simplenav">
 								<a href="#">Home</a> | 
-								<a href="about.html">About</a> |
-								<a href="sidebar-right.html">Sidebar</a> |
-								<a href="contact.html">Contact</a> |
+								<a href="SectionUnderConstructionPage.html">About</a> |
+								<a href="SectionUnderConstructionPage.html">Sidebar</a> |
+								<a href="SectionUnderConstructionPage.html">Contact</a> |
 								<b><a href="signup.html">Sign up</a></b>
 							</p>
 						</div>

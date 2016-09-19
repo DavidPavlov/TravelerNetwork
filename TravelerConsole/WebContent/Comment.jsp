@@ -163,9 +163,9 @@
                         <div class="widget-body">
                             <p class="simplenav">
                                 <a href="#">Home</a> | 
-                                <a href="about.html">About</a> |
-                                <a href="sidebar-right.html">Sidebar</a> |
-                                <a href="contact.html">Contact</a> |
+                                <a href="SectionUnderConstructionPage.html">About</a> |
+                                <a href="SectionUnderConstructionPage.html">Sidebar</a> |
+                                <a href="SectionUnderConstructionPage.html">Contact</a> |
                                 <b><a href="signup.html">Sign up</a></b>
                             </p>
                         </div>
