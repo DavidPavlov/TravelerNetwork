@@ -26,9 +26,7 @@ public class AddDestinationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getSession().getAttribute("user") == null) {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
+		ServletUtils.checkIfLoggedIn(request, response);
 
 		String name = request.getParameter("name");
 		String longitude = request.getParameter("long");

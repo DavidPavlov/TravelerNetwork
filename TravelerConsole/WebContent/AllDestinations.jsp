@@ -35,7 +35,11 @@
 
 <body>
 	<!-- Fixed navbar -->
-	
+	<%
+   		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
+   		response.addHeader("Pragma", "no-cache"); 
+   		response.addDateHeader ("Expires", 0);
+  	%>
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
@@ -49,7 +53,7 @@
 					<li><a href="AllDestinations.jsp">Destinations</a></li>
 							
 					<%if(request.getSession().getAttribute("user") == null){ %>
-						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+						<li><a class="btn" href="SignIn.jsp">SIGN IN / SIGN UP</a></li>
 					<%}else{ %>
 						<li><a class="btn" href="LogoutServlet">Logout</a></li>
 						<li><a class="btn" href="profile.jsp">PROFILE</a></li>
@@ -102,7 +106,7 @@
 					<%! Map<String,Destination> destinationsAndAuthors = DestinationsManager.getInstance().getAllDestinations(); %>
 						<%System.out.println(destinationsAndAuthors.size()); %>
 					<%! Collection<Destination>  destinations = destinationsAndAuthors.values();%>
-					<%!int count = 1; %>					
+					<%!int count = 0; %>					
 					<table>
 						<tr>			
 						<%for(Destination dest : destinations){ %>							
@@ -114,7 +118,9 @@
 								<h5><a href="Destination.jsp?name=<%= dest.getName()%>"><%=dest.getName() %></a></h5>
 								<img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150"/>
 							</td>
+							<%count++; %>
 						<%} %>
+						<%count=0; %>
 						</tr>
 					</table>
 				</article>

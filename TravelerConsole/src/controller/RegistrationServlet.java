@@ -56,7 +56,7 @@ public class RegistrationServlet extends HttpServlet {
 			response.sendRedirect("index.jsp");
 		} else {
 			System.out.println("Registration failed! Password is incorrect!");
-			RequestDispatcher view = request.getRequestDispatcher("signup.html");
+			RequestDispatcher view = request.getRequestDispatcher("SignUp.jsp");
 			view.forward(request, response);
 		}
 	}

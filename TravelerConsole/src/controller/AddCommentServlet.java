@@ -21,9 +21,8 @@ public class AddCommentServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("user") == null) {
-			request.getRequestDispatcher("signin.html").forward(request, response);
-		}
+		ServletUtils.checkIfLoggedIn(request, response);
+
 		String destName = request.getParameter("name");
 		if (destName == null || destName == "") {
 			request.getRequestDispatcher("Comment.jsp").forward(request, response);
