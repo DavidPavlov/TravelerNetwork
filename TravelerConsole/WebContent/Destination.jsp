@@ -30,9 +30,14 @@
 </head>
 
 <body>
+	<%
+   		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
+   		response.addHeader("Pragma", "no-cache"); 
+   		response.addDateHeader ("Expires", 0);
+  	%>
 	<!-- Fixed navbar -->
 	<%if (request.getParameter("name") == null){ %>
-		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
+		<%response.sendRedirect("AllDestinations.jsp"); %>
 	<%} %>
 	
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
@@ -42,12 +47,13 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 				<a class="navbar-brand" href="index.jsp"><img src="assets/images/logo4.png" alt="The Traveler Bulgaria"></a>
 			</div>
+			
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="index.jsp">Home</a></li>					
 					<li><a href="AllDestinations.jsp">Destinations</a></li>
 					<%if(request.getSession().getAttribute("user") == null){ %>
-						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+						<li><a class="btn" href="SignIn.jsp">SIGN IN / SIGN UP</a></li>
 					<%}else{ %>
 						<li><a class="btn" href="LogoutServlet">Logout</a></li>
 						<li><a class="btn" href="profile.jsp">PROFILE</a></li>
@@ -71,8 +77,10 @@
 		<div class="row">
 			
 			<!-- Sidebar -->
+			<% Destination dest = null; %>
+			<%if (request.getParameter("name") != null){ %>
 			<aside class="col-md-4 sidebar sidebar-left">
-						<% Destination dest = DestinationsManager.getInstance().getDestinationFromCache(request.getParameter("name")); %>
+						<% dest = DestinationsManager.getInstance().getDestinationFromCache(request.getParameter("name")); %>
 						<%if(dest == null){ %>
 							<%request.getRequestDispatcher("AllDestinations.jsp").forward(request, response); %>
 							
@@ -96,6 +104,7 @@
 				
 
 			</aside>
+			
 			<!-- /Sidebar -->
 
 			<!-- Article main content -->
@@ -137,7 +146,9 @@
 			<!-- /Article -->
 
 		</div>
+		
 		<div id="map" style="width:100% height:100%"></div>
+		<%} %>
 	</div>	<!-- /container -->
 	
 	
@@ -226,6 +237,7 @@
 	
 	<script>
 		function myMap() {
+			<%if (request.getParameter("name") != null){ %>
 			var myCenter = new google.maps.LatLng(<%= dest.getLocation().getLongitude()%>,<%= dest.getLocation().getLattitude()%>);
 			  var mapCanvas = document.getElementById("map");
 			  var mapOptions = {
@@ -242,6 +254,7 @@
 			  var map = new google.maps.Map(mapCanvas, mapOptions);
 			  var marker = new google.maps.Marker({position:myCenter});
 			  marker.setMap(map);
+			 <%}%>
 		}
 	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQKyIgPewrgRCgagA1sDItFSRZh5hZlL4&callback=myMap"></script>

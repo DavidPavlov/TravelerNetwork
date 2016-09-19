@@ -28,6 +28,11 @@
 </head>
 
 <body class="home">
+	<%
+   		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
+   		response.addHeader("Pragma", "no-cache"); 
+   		response.addDateHeader ("Expires", 0);
+  	%>
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
@@ -42,7 +47,7 @@
 					<li><a href="AllDestinations.jsp">Destinations</a></li>
 							
 					<%if(request.getSession().getAttribute("user") == null){ %>
-						<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+						<li><a class="btn" href="SignIn.jsp">SIGN IN / SIGN UP</a></li>
 					<%}else{ %>
 						<li><a class="btn" href="LogoutServlet">Logout</a></li>
 						<li><a class="btn" href="profile.jsp">PROFILE</a></li>

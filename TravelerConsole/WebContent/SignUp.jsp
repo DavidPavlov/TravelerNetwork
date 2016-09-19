@@ -1,5 +1,3 @@
-<%@page import="functionality.DestinationsManager"%>
-<%@page import="models.Destination"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +8,7 @@
 	<meta name="description" content="">
 	<meta name="author"      content="David & Yasen">
 	
-	<title>Comment</title>
+	<title>Register in The Traveler Bulgaria</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
@@ -30,27 +28,19 @@
 </head>
 
 <body>
-	<%
-   		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
-   		response.addHeader("Pragma", "no-cache"); 
-   		response.addDateHeader ("Expires", 0);
-  	%>
 	<!-- Fixed navbar -->
-	<%@ include file="CheckIfLoggedIn.jsp" %>
-	
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.jsp"><img src="assets/images/logo4.png" alt="The Traveler Bulgaria"></a>
+				<a class="navbar-brand" href="index.jsp"><img src="assets/images/logo4.png" alt="Progressus HTML5 template"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a href="index.jsp">Home</a></li>					
+					<li><a href="index.html">Home</a></li>
 					<li><a href="AllDestinations.jsp">Destinations</a></li>
-					<li><a class="btn" href="LogoutServlet">Logout</a></li>
-					<li><a class="btn" href="profile.jsp">PROFILE</a></li>
+					<li class="active"><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -63,56 +53,77 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="index.jsp">Home</a></li>
-			<li class="active">Comment</li>
+			<li><a href="index.html">Home</a></li>
+			<li class="active">Registration</li>
 		</ol>
 
 		<div class="row">
 			
 			<!-- Article main content -->
-			<%if(request.getSession().getAttribute("user")!=null){ %>
-			<article class="col-sm-9 maincontent">
+			<article class="col-xs-12 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Comment</h1>
+					<h1 class="page-title">Registration</h1>
 				</header>
 				
-				<%Destination dest = DestinationsManager.getInstance().getDestinationFromCache(request.getParameter("name")); %>
-				
-				<p>
-					 Share your experience in <%= dest.getName() %>
-				</p>
-				<br>
-					<form action="AddCommentServlet?name=<%=dest.getName()%>" method="POST">
-						
-						<div class="row">
-							<div class="col-sm-12">
-								<textarea name="comment" placeholder="Type your comment here..." class="form-control" rows="9"></textarea>
-							</div>
-						</div>
-						<br>
-						<div class="row">	
-							<div class="col-sm-6">
-								
-							</div>			
-							<div class="col-sm-6 text-right">
-								<input class="btn btn-action" type="submit" value="Submit Comment">
-							</div>
-						</div>
-					</form>
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Register a new account</h3>
+							<p><a href="signin.html">Login</a></p>
+							<hr>
 
+							<form action = "registration" method = "POST" enctype="multipart/form-data">
+								<div class="top-margin">
+									<label>First Name</label>
+									<input type="text" name="userFirstName" class="form-control">
+								</div>
+								<div class="top-margin">
+									<label>Last Name</label>
+									<input type="text" name="userLastName" class="form-control">
+								</div>
+								<div class="top-margin">
+									<label>Email Address <span class="text-danger">*</span></label>
+									<input type="text" name="userEmailAddress" class="form-control">
+								</div>
+
+								<div class="row top-margin">
+									<div class="col-sm-6">
+										<label>Password <span class="text-danger">*</span></label>
+										<input type="password" name="userPassword" class="form-control">
+									</div>									
+								</div>
+								<div class = "row top-margin">
+									<label>Description<span class="text-danger">*</span></label>
+									<input type = "textarea" name="userDescription" class = "form-control">
+									
+								</div>
+								
+								<div class = "row">
+									<label>Picture<span class="text-danger">*</span></label>
+									<input type = "file" name="profilePic" class = "form-control">
+									
+								</div>
+
+								<hr>
+
+								<div class="row">
+									
+									<div class="col-lg-4 text-right">
+										<button class="btn btn-action" type="submit">Register</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+				
 			</article>
 			<!-- /Article -->
-			
-			<!-- Sidebar -->
-			<aside class="col-sm-3 sidebar sidebar-right">
 
-				<img src="DestinationPictureServlet?destination=<%=dest.getName()%>"/>
-
-			</aside>
-			<!-- /Sidebar -->
-			<%} %>
 		</div>
 	</div>	<!-- /container -->
+	
 
 	<footer id="footer" class="top-space">
 
@@ -183,7 +194,7 @@
             </div>
         </div>
 
-    </footer>
+    </footer>   
 		
 
 
@@ -195,8 +206,5 @@
 	<script src="assets/js/headroom.min.js"></script>
 	<script src="assets/js/jQuery.headroom.min.js"></script>
 	<script src="assets/js/template.js"></script>
-
-	
-
 </body>
 </html>

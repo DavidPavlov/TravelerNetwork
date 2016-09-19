@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("index.jsp");
 		} else { // No such user name or invalid password
 			System.out.println("No such username of invalid password!");
-			response.sendRedirect("signin.html");
+			response.sendRedirect("SignIn.jsp");
 		}
 	}
 

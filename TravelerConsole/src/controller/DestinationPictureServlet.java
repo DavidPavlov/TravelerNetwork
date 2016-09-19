@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import functionality.DestinationsManager;
 import models.Destination;
-import models.User;
 
 /**
  * Servlet implementation class DestinationPictureServlet
@@ -43,12 +42,9 @@ public class DestinationPictureServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
-			response.sendRedirect("index.jsp");
-		} else {
-			returnDestinationPic(request, response);
-		}
+
+		returnDestinationPic(request, response);
+
 	}
 
 }

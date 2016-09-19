@@ -1,3 +1,4 @@
+<%@page import="controller.ServletUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import = "models.*" %>
@@ -30,12 +31,13 @@
 
 <body>
 	<!-- Fixed navbar -->
-	<%if (request.getSession().isNew()){ %>
-		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
-	<%} %>
-	<%if(request.getSession().getAttribute("user")==null){ %>
-		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
-	<%} %>
+	<%
+   		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
+   		response.addHeader("Pragma", "no-cache"); 
+   		response.addDateHeader ("Expires", 0);
+  	%>
+	<%@ include file="CheckIfLoggedIn.jsp" %>
+	
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
 			<div class="navbar-header">
@@ -68,14 +70,16 @@
 		<div class="row">
 			
 			<!-- Sidebar -->
+			<%if(request.getSession().getAttribute("user")!=null){ %>
+			
 			<aside class="col-md-4 sidebar sidebar-left">
-
+					
 				<div class="row widget">
 					<div class="col-xs-12">	
-						<%if(request.getSession().getAttribute("user")!=null){ %>
+						
 							<h4><%out.print(((User)request.getSession().getAttribute("user")).getFirstName() + " " + ((User)request.getSession().getAttribute("user")).getLastName()); %></h4>
 							<p><%out.print(((User)request.getSession().getAttribute("user")).getDescription()); %></p>
-						<%} %>									
+															
 						
 					</div>
 				</div>
@@ -89,7 +93,7 @@
 						<a class="btn" href="AddDestination.jsp">Add Destination</a>
 					</div>
 				</div>
-
+						
 			</aside>
 			<!-- /Sidebar -->
 
@@ -99,19 +103,25 @@
 					<h1 class="page-title">Visited Destinations</h1>
 				</header>
 					<% ArrayList<Destination> visitedDestinations =  ((User)request.getSession().getAttribute("user")).getVisitedPlaces();%>
-					
-					<table>			
+					<%int count =0; %>
+					<table>
+						<tr>			
 						<%for(Destination dest : visitedDestinations){ %>
-						<tr>
+						<%if(count%3==0){ %>
+								</tr>
+								<tr>
+							<%} %>
 							<td>
 								<h5><a href="Destination.jsp?name=<%= dest.getName()%>"><%=dest.getName() %></a></h5>
-								<img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150" alt=""/>
+								<img src="DestinationPictureServlet?destination=<%= dest.getName()%>" height="150" width="150"/>
 							</td>
-						</tr>
+							<%count++; %>
 						<%} %>
-						
+						<%count=0; %>
+						</tr>
 					</table>
 				</article>
+				<%} %>
 			<!-- /Article -->
 
 		</div>
