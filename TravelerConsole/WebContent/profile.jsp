@@ -30,7 +30,7 @@
 
 <body>
 	<!-- Fixed navbar -->
-	<%if (request.getSession() == null){ %>
+	<%if (request.getSession().isNew()){ %>
 		<%request.getRequestDispatcher("index.jsp").forward(request, response); %>
 	<%} %>
 	<%if(request.getSession().getAttribute("user")==null){ %>

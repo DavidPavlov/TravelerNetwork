@@ -14,13 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getSession().getAttribute("user") != null) {
+			request.getSession().removeAttribute("user");
 			request.getSession().invalidate();
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			response.sendRedirect("index.jsp");
 		} else {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			response.sendRedirect("index.jsp");
 		}
 	}
 
