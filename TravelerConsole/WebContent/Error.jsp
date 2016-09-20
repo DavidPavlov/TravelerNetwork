@@ -10,7 +10,7 @@
 </head>
 <body>
 <form class="form-signin" action="index.jsp">  
-    <img class="make-it-fit" src="pictures\Error.jpg">
+    <img class="make-it-fit" src="pictures\error.jpg">
     <button type="submit" style="height:80px;width:300px" class="button1">Go to Home Page</button>
     <style>
 		.imagewrap {display:inline-block;position:relative;}

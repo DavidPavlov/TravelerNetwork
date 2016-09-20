@@ -66,7 +66,7 @@ public class AddDestinationServlet extends HttpServlet {
 						System.out.println("Invalid destination Data");
 					}
 					System.out.println("Destination Registration Successful!");
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					request.getRequestDispatcher("AllDestinations.jsp").forward(request, response);
 				} else {
 					request.getRequestDispatcher("AddDestination.jsp").forward(request, response);
 				}

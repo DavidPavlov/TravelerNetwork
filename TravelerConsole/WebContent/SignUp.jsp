@@ -39,7 +39,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="index.jsp">Home</a></li>
 					<li><a href="AllDestinations.jsp">Destinations</a></li>
 					<li class="active"><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
 				</ul>
@@ -54,7 +54,7 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="index.html">Home</a></li>
+			<li><a href="index.jsp">Home</a></li>
 			<li class="active">Registration</li>
 		</ol>
 
