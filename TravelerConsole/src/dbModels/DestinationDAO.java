@@ -109,7 +109,7 @@ public class DestinationDAO {
 		return destinations;
 	}
 
-	public boolean saveDestinationToDB(User u, Destination destination) {
+	public synchronized boolean saveDestinationToDB(User u, Destination destination) {
 		String insertDestinationInfoIntoDB = "INSERT INTO destinations (name, description, longitude, lattitude, picture) VALUES (?, ?, ?, ?, ?);";
 		String insertIntoVisitedDestinations = "INSERT INTO visited_destinations (destination_name, user_email) VALUES (?, ?);";
 		PreparedStatement statement = null;
@@ -159,7 +159,8 @@ public class DestinationDAO {
 		}
 	}
 
-	public boolean updateDestinationInDB(String name, String description, double longitude, double lattitude,
+	public synchronized boolean updateDestinationInDB(String name, String description, double longitude,
+			double lattitude,
 			String picture) {
 		PreparedStatement prepStatement = null;
 		String updateDestinationStatement = "UPDATE destinations SET description=?, longitude=?, lattitude=?, picture=?  WHERE name=?;";

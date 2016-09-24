@@ -1,3 +1,4 @@
+<%@page import="functionality.ProjectManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ page errorPage="Error.jsp"%>
@@ -28,6 +29,8 @@
 	<![endif]-->
 </head>
 
+
+     <% ProjectManager.getInstance(); %>
 <body class="home">
 	<%
    		response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 

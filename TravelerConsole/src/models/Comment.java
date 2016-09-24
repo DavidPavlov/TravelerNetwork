@@ -7,32 +7,32 @@ import exceptions.InvalidDataException;
 
 public class Comment {
 
-	private User author;
+	private String authorEmail;
 	private String placeName;
 	private String text;
 	private int numberOfLikes;
-	private ArrayList<User> userLikers; // List of users who like the comment
+	private ArrayList<String> userLikers; // List of users who like the comment
 
-	public Comment(User author, String placeName, String text, int numberOfLikes)
+	public Comment(String authorEmail, String placeName, String text, int numberOfLikes)
 			throws InvalidDataException, InvalidAuthorException {
-		setAuthor(author);
+		setAuthor(authorEmail);
 		this.placeName = placeName;
 		this.setText(text);
 		this.numberOfLikes = numberOfLikes;
 		this.userLikers = new ArrayList<>();
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(String authorEmail) {
 		synchronized (this) {
-			if (author != null) {
-				this.author = author;
+			if (authorEmail != null) {
+				this.authorEmail = authorEmail;
 			}
 		}
 	}
 
-	public User getAuthor() {
+	public String getAuthorEmail() {
 		synchronized (this) {
-			return (User) author;
+			return authorEmail;
 		}
 	}
 
@@ -58,28 +58,31 @@ public class Comment {
 		}
 	}
 
-	public void addLike() {
+	public void like(String userEmail) {
 		synchronized (this) {
-			this.numberOfLikes++;
+			if (addUserLiker(userEmail)) { // if the user has not liked yet
+				this.numberOfLikes++;
+			}
 		}
 	}
 
-	public ArrayList<User> getUserLikers() {
+	public ArrayList<String> getUserLikers() {
 		synchronized (this) {
-			ArrayList<User> copy = new ArrayList<>();
+			ArrayList<String> copy = new ArrayList<>();
 			copy.addAll(userLikers);
 			return copy;
 		}
 	}
 
-	public void addUserLiker(User user) {
+	private boolean addUserLiker(String userEmail) {
 		synchronized (this) {
 			for (int i = 0; i < userLikers.size(); i++) {
-				if (userLikers.get(i) == user) {
-					return;
+				if (userLikers.get(i) == userEmail) {
+					return false;
 				}
 			}
-			userLikers.add(user);
+			userLikers.add(userEmail);
+			return true;
 		}
 	}
 

@@ -26,10 +26,6 @@ public class UserDao {
 
 	public Set<User> getAllUsers() {
 		System.out.println("Getting all users from DB!!!!");
-		// ConcurrentHashMap<String, String> allDestinationsAndAuthors =
-		// DestinationDAO.getInstance()
-		// .getAllDestinationsAndAuthors(); // cache with dest. names and
-		// // author emails
 		Set<User> users = new HashSet<User>();
 		Statement statement = null;
 		ResultSet result = null;
@@ -44,29 +40,7 @@ public class UserDao {
 							result.getString("profilePic")); // creating a new
 																// user with
 																// info from DB
-					// for (Entry<String, String> entry :
-					// allDestinationsAndAuthors.entrySet()) { // searches
-					// for
-					// user
-					// email
-					// in
-					// cache
-					// if (entry.getValue().equals(user.getEmail())) { // when
-					// match
-					// Destination destination =
-					// DestinationsManager.getInstance()
-					// .getDestinationFromCache(entry.getKey()); // creates
-					// a
-					// destination
-					// with
-					// info
-					// from
-					// Manager
-					// cache
-					// user.addVisitedPlace(destination); // add dest. to
-					// new user
-					// }
-					// }
+
 					users.add(user); // add user to allUsers cache
 				}
 				System.out.println("All users returned from DB.");
@@ -97,7 +71,7 @@ public class UserDao {
 		return users;
 	}
 
-	public boolean saveUserToDB(User user) {
+	public synchronized boolean saveUserToDB(User user) {
 		String insertUserInfoIntoDB = "INSERT INTO users (first_name, last_name, password, email, description, profilePic) VALUES (?, ?, ?, ?, ?, ?);";
 		PreparedStatement statement = null;
 		try {
@@ -129,7 +103,8 @@ public class UserDao {
 		return true;
 	}
 
-	public boolean updateUserInDB(String email, String password, String firstName, String lastName, String description,
+	public synchronized boolean updateUserInDB(String email, String password, String firstName, String lastName,
+			String description,
 			String profilePic) {
 		// Update all fields of the current user except email (primary key)
 		PreparedStatement prepStatement = null;

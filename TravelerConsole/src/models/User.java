@@ -2,14 +2,14 @@ package models;
 
 import java.util.ArrayList;
 
-public class User implements Cloneable {
+public class User {
 
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String email;
 	private String description;
-	private ArrayList<Destination> visitedPlaces;
+	private ArrayList<String> addedPlaces;
 	private String profilePic;
 
 	public User(String firstName, String lastName, String password, String email, String description,
@@ -19,7 +19,7 @@ public class User implements Cloneable {
 		this.password = password;
 		this.email = email;
 		this.description = description;
-		this.visitedPlaces = new ArrayList<>();
+		this.addedPlaces = new ArrayList<>();
 		this.profilePic = profilePic;
 	}
 
@@ -65,11 +65,11 @@ public class User implements Cloneable {
 		}
 	}
 
-	public ArrayList<Destination> getVisitedPlaces() {
+	public ArrayList<String> getAddedPlaces() {
 		synchronized (this) {
-			ArrayList<Destination> copy = new ArrayList<>();
-			copy.addAll(visitedPlaces);
-			return visitedPlaces;
+			ArrayList<String> copy = new ArrayList<>();
+			copy.addAll(addedPlaces);
+			return addedPlaces;
 		}
 	}
 
@@ -103,9 +103,9 @@ public class User implements Cloneable {
 		}
 	}
 
-	public synchronized void addVisitedPlace(Destination destination) {
+	public synchronized void addPlace(String destinationName) {
 		synchronized (this) {
-			this.visitedPlaces.add(destination);
+			this.addedPlaces.add(destinationName);
 		}
 	}
 

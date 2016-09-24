@@ -4,16 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import exceptions.CannotConnectToDBException;
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidDataException;
-import functionality.DestinationsManager;
-import functionality.UsersManager;
 import models.Comment;
-import models.User;
 
 public class CommentDao {
 
@@ -29,9 +25,9 @@ public class CommentDao {
 		return instance;
 	}
 
-	public Set<Comment> getAllComments() {
+	public synchronized ArrayList<Comment> getAllComments() {
 		System.out.println("Getting all comments from DB!!!!");
-		Set<Comment> comments = new HashSet<Comment>();
+		ArrayList<Comment> comments = new ArrayList<>();
 		Statement statement = null;
 		ResultSet result = null;
 		try {
@@ -41,13 +37,11 @@ public class CommentDao {
 				result = statement.executeQuery(selectAllCommentsFromDB);
 				while (result.next()) {
 					try {
-
-						User author = UsersManager.getInstance().getUserFromCache(result.getString("author_email"));
-						Comment comment = new Comment(author, result.getString("place_name"), result.getString("text"),
+						Comment comment = new Comment(result.getString("author_email"),
+								result.getString("place_name"),
+								result.getString("text"),
 								result.getInt("number_of_likes"));
 						comments.add(comment);
-						DestinationsManager.getInstance().getDestinationFromCache(result.getString("place_name"))
-								.addComment(comment);
 					} catch (InvalidDataException | InvalidAuthorException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -81,12 +75,12 @@ public class CommentDao {
 		return comments;
 	}
 
-	public boolean saveCommentToDB(Comment comment) {
+	public synchronized boolean saveCommentToDB(Comment comment) {
 		String insertCommentIntoDB = "INSERT INTO comments (author_email, place_name, text, number_of_likes) VALUES (?, ?, ?, ?);";
 		PreparedStatement statement = null;
 		try {
 			statement = DBManager.getInstance().getConnection().prepareStatement(insertCommentIntoDB);
-			statement.setString(1, comment.getAuthor().getEmail());
+			statement.setString(1, comment.getAuthorEmail());
 			statement.setString(2, comment.getPlaceName());
 			statement.setString(3, comment.getText());
 			statement.setInt(4, comment.getNumberOfLikes());

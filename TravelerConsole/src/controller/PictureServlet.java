@@ -19,6 +19,7 @@ import models.User;
  */
 @WebServlet("/PictureServlet")
 public class PictureServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	public static void returnProfilePic(User u, HttpServletResponse response) throws IOException {
 

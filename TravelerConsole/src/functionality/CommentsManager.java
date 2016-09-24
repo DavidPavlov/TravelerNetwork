@@ -1,27 +1,26 @@
 package functionality;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
 
 import dbModels.CommentDao;
 import exceptions.InvalidAuthorException;
 import exceptions.InvalidDataException;
 import models.Comment;
-import models.User;
 
 public class CommentsManager {
 
 	private static CommentsManager instance; // Singleton
-	private ConcurrentHashMap<String, Comment> allComments;
+	private ArrayList<Comment> allComments; // all cached comments
 
 	private CommentsManager() {
-		allComments = new ConcurrentHashMap<>();
+		allComments = new ArrayList<>();
 		for (Comment c : CommentDao.getInstance().getAllComments()) { // adds
 																		// all
 																		// comments
 																		// from
 																		// DB to
 																		// collection
-			allComments.put(c.getPlaceName(), c);
+			allComments.add(c);
 		}
 	}
 
@@ -32,13 +31,13 @@ public class CommentsManager {
 		return instance;
 	}
 
-	public void saveComment(User user, String placeName, String text, int numberOfLikes) {
+	public synchronized void saveComment(String userEmail, String placeName, String text) {
 		try {
-			Comment comment = new Comment(user, placeName, text, numberOfLikes);
-			allComments.put(comment.getPlaceName(), comment); // adds the new
-																// comment to
-																// the
-																// collection
+			Comment comment = new Comment(userEmail, placeName, text, 0);
+			allComments.add(comment); // adds the new
+										// comment to
+										// the
+										// collection
 			CommentDao.getInstance().saveCommentToDB(comment); // saves comment
 																// to
 																// DB
@@ -49,9 +48,9 @@ public class CommentsManager {
 		}
 	}
 
-	public ConcurrentHashMap<String, Comment> getAllComments() {
-		ConcurrentHashMap<String, Comment> copy = new ConcurrentHashMap<>();
-		copy.putAll(allComments);
+	public synchronized ArrayList<Comment> getAllComments() {
+		ArrayList<Comment> copy = new ArrayList<>();
+		copy.addAll(allComments);
 		return copy;
 	}
 

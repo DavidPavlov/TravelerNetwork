@@ -34,7 +34,7 @@ public class AddCommentServlet extends HttpServlet {
 		if (DestinationsManager.getInstance().getDestinationFromCache(destName) == null) {
 			request.getRequestDispatcher("AllDestinations.jsp").forward(request, response);
 		}
-		CommentsManager.getInstance().saveComment(user, destName, comment, 0);
+		CommentsManager.getInstance().saveComment(user.getEmail(), destName, comment);
 		request.getRequestDispatcher("Destination.jsp?name=" + destName).forward(request, response);
 	}
 

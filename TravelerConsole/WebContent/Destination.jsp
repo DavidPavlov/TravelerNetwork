@@ -1,3 +1,4 @@
+<%@page import="functionality.UsersManager"%>
 <%@page import="functionality.DestinationsManager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -125,8 +126,9 @@
 							<tr>	
 								<%for(Comment comment : dest.getComments()){ %>				
 										<td>
-											<h6><%= comment.getAuthor().getFirstName()+ " " + comment.getAuthor().getLastName()%></h6>
-											<img src="PictureServlet?user=<%= comment.getAuthor().getEmail()%>" height="60" width="60"/>
+										<% User user = UsersManager.getInstance().getUserFromCache(comment.getAuthorEmail()); %>
+											<h6><%= (user.getFirstName()+ " " + user.getLastName()) %></h6>
+											<img src="PictureServlet?user=<%= user.getEmail()%>" height="60" width="60"/>
 										</td>
 										<td>
 											<p><%=comment.getText() %></p>

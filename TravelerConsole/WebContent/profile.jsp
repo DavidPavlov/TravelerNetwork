@@ -1,8 +1,11 @@
+<%@page import="java.util.Map.Entry"%>
+<%@page import="functionality.DestinationsManager"%>
 <%@page import="controller.ServletUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import = "models.*" %>
 <%@ page import = "java.util.ArrayList" %>
+<%@ page import="java.util.Map" %>
 <%@ page errorPage="Error.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -101,13 +104,19 @@
 			<!-- Article main content -->
 			<article class="col-md-8 maincontent">
 				<header class="page-header">
-					<h1 class="page-title">Visited Destinations</h1>
+					<h1 class="page-title">Added Destinations</h1>
 				</header>
-					<% ArrayList<Destination> visitedDestinations =  ((User)request.getSession().getAttribute("user")).getVisitedPlaces();%>
-					<%int count =0; %>
+					<% ArrayList<Destination> addedDestinations = new ArrayList<>(); 
+					for (Map.Entry<String, Destination> destinationEntry : DestinationsManager.getInstance()
+                    .getAllDestinations().entrySet()) {
+					   if (((User)request.getSession().getAttribute("user")).getAddedPlaces().contains(destinationEntry.getKey())) {
+					       addedDestinations.add(destinationEntry.getValue());
+					   }
+					}%>
+					<%int count=0; %>
 					<table>
 						<tr>			
-						<%for(Destination dest : visitedDestinations){ %>
+						<%for(Destination dest : addedDestinations){ %>
 						<%if(count%3==0){ %>
 								</tr>
 								<tr>

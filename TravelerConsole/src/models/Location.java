@@ -1,6 +1,6 @@
 package models;
 
-public class Location implements Cloneable {
+public class Location {
 	private double lattitude;
 	private double longitude;
 

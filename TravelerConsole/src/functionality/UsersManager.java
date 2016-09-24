@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,33 +24,17 @@ public class UsersManager {
 	public static final String PATH_TO_LOG = "log.txt";
 
 	private static UsersManager instance; // Singleton
-	private ConcurrentHashMap<String, User> registerredUsers;
+	private ConcurrentHashMap<String, User> registerredUsers; // user email and
+																// user
 
 	private UsersManager() {
 		registerredUsers = new ConcurrentHashMap<>();
 		Set<User> tempAllUsers = UserDao.getInstance().getAllUsers();
-		Map<String, Destination> allDestinations = DestinationsManager.getInstance().getAllDestinations();
 		for (User u : tempAllUsers) { // adds all users
 										// from DB to
 										// collection
 			registerredUsers.put(u.getEmail(), u); // add user to cache
-			for (Map.Entry<String, Destination> e : allDestinations.entrySet()) { // destinations
-																					// cache
-				if (e.getValue().getAuthorEmail().equals(u.getEmail())) { // if
-																			// the
-																			// user
-																			// is
-																			// the
-																			// author
-																			// of
-																			// the
-																			// destination
-					u.addVisitedPlace(e.getValue()); // adds the destination to
-														// user
-				}
-			}
 		}
-
 	}
 
 	public static synchronized UsersManager getInstance() {
@@ -93,17 +76,17 @@ public class UsersManager {
 		UserDao.getInstance().saveUserToDB(user); // saves user to DB
 	}
 
-	public void addVisitedDestination(User user, Destination destination) {
-		user.getVisitedPlaces().add(destination);
+	public void addDestination(User user, String destinationName) {
+		user.getAddedPlaces().add(destinationName);
 	}
 
-	public boolean addComment(User user, String destinationName, String text) {
-		if (!registerredUsers.containsKey(user)) {
+	public boolean addComment(String userEmail, String destinationName, String text) {
+		if (!registerredUsers.containsKey(userEmail)) {
 			return false;
 		}
 		try {
-			Comment comment = new Comment(user, destinationName, text, 0);
-			CommentsManager.getInstance().saveComment(user, destinationName, text, 0);
+			Comment comment = new Comment(userEmail, destinationName, text, 0);
+			CommentsManager.getInstance().saveComment(userEmail, destinationName, text);
 			DestinationsManager.getInstance().getDestinationFromCache(destinationName).addComment(comment); // adds
 																											// the
 																											// comment
@@ -126,7 +109,7 @@ public class UsersManager {
 		String destPicture = destination.getPicture();
 		if (DestinationsManager.getInstance().addDestination(user, destName, destDescription, destLattitude,
 				destLongitude, destPicture)) {
-			addVisitedDestination(user, destination);
+			addDestination(user, destName);
 			return true;
 		} else {
 			return false;
@@ -179,32 +162,38 @@ public class UsersManager {
 		return registerredUsers.get(userEmail); // returns the user
 	}
 
-	public boolean addUserToComment(User user, Comment comment) {
-		if (registerredUsers.contains(user)) {
-			comment.setAuthor(user);
+	public ConcurrentHashMap<String, User> getRegisterredUsers() {
+		ConcurrentHashMap<String, User> copy = new ConcurrentHashMap<>();
+		copy.putAll(registerredUsers);
+		return copy;
+	}
+
+	public boolean addUserToComment(String userEmail, Comment comment) {
+		if (registerredUsers.containsKey(userEmail)) {
+			comment.setAuthor(userEmail);
 			return true;
 		}
 		return false;
 	}
 
-	public void likeAComment(User user, Comment comment) {
-		ArrayList<User> userLikersOfComment = comment.getUserLikers(); // all
-																		// the
-																		// users
-																		// who
-																		// like
-																		// the
-																		// comment
+	public void likeAComment(String userEmail, Comment comment) {
+		ArrayList<String> userLikersOfComment = comment.getUserLikers(); // all
+																			// the
+																			// users
+																			// who
+																			// like
+																			// the
+																			// comment
 		for (int i = 0; i < userLikersOfComment.size(); i++) {
-			if (userLikersOfComment.get(i) == user) { // if the current user
-														// has already liked
-														// the comment
+			if (userLikersOfComment.get(i) == userEmail) { // if the current
+															// user
+															// has already liked
+															// the comment
 				return; // do nothing
 			}
 		}
-		comment.addLike(); // the comment is liked
-		comment.addUserLiker(user); // the user is added to the list of
-									// users who like the comment
+		comment.like(userEmail); // the comment is liked
+
 	}
 
 	private static void printToLog(String message) {

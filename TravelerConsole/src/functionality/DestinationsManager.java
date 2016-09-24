@@ -12,8 +12,14 @@ import models.User;
 public class DestinationsManager {
 
 	private static DestinationsManager instance; // Singleton
-	private ConcurrentHashMap<String, Destination> allDestinations;
-	private ConcurrentHashMap<String, String> allDestinationsAndAuthors;
+	private ConcurrentHashMap<String, Destination> allDestinations; // destination
+																	// name and
+																	// destination
+	private ConcurrentHashMap<String, String> allDestinationsAndAuthors; // destination
+																			// name
+																			// and
+																			// author
+																			// email
 
 	private DestinationsManager() {
 
@@ -33,7 +39,6 @@ public class DestinationsManager {
 											// to
 											// collection
 			allDestinations.put(d.getName(), d);
-
 		}
 
 	}
@@ -66,7 +71,7 @@ public class DestinationsManager {
 			allDestinations.put(name, destination); // adds the new destination
 			allDestinationsAndAuthors.put(name, user.getEmail()); // to the
 																	// collection
-			user.addVisitedPlace(destination);
+			user.addPlace(name);
 			DestinationDAO.getInstance().saveDestinationToDB(user, destination); // saves
 																					// destination
 																					// to
