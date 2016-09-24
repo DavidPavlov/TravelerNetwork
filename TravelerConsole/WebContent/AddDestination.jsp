@@ -221,12 +221,12 @@ function initialize() {
     map = new google.maps.Map(document.getElementById("map"), myOptions);
 
     
-    var image = '/images/googlepins/pin2.png';  
+      
     marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      icon: image,
-      title:"Property Location"
+      
+      
     });
 
     
@@ -246,7 +246,7 @@ function initialize() {
             marker = null;
          }        
 
-        var image = '/images/googlepins/pin2.png';
+       
         var myLatLng = event.latLng ;
        
         marker = new google.maps.Marker({   
